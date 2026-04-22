@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+<meta charset="utf-8" />
+<title>Automatización + IA — Taller Ignia</title>
+<link rel="stylesheet" href="tokens.css" />
+<script src="deck-stage.js"></script>
+
+<script type="application/json" id="speaker-notes">
+[
+  "[⏰ Marcador de tiempo: Minuto 0] Buenas noches, gente con fuego. Antes de arrancar, cierra Instagram, cierra WhatsApp web, respira. En las próximas tres horas vas a construir — con tus manos — un sistema de IA que va a trabajar por ti mientras duermes. No lo vas a VER. Lo vas a HACER. Yo soy Salomón, cofundador de Ignia, y hoy te voy a demostrar que tú — sí, tú, que dices que no eres técnico — puedes dejar de hacer cosas manuales que te roban la vida. Mira a la persona del lado. Salúdala. Porque al final los dos van a tener lo mismo: un conserje de IA funcionando.",
+  "[⏰ Marcador de tiempo: Minuto 3] Te voy a decir exactamente qué te llevas. No teoría. No inspiración barata. Un sistema real: un formulario público donde tus clientes escriben, una IA que los lee y prioriza, una base de datos ordenada, y un disparador que envía correos solos cuando tú apruebas. Esto lo cobra una agencia por ocho millones. Hoy lo construyes tú, en tres horas, con herramientas gratis. Esa es la promesa. Si no te funciona al final, te devuelvo tu tiempo. En serio.",
+  "[⏰ Marcador de tiempo: Minuto 6] Tres reglas innegociables. Una: abre AHORITA las cuatro cuentas — Notion, n8n, Fillout, OpenAI. Si falta alguna, copiloto a tu lado en dos minutos. Dos: mira al salón. Tres copilotos técnicos. Levántense copilotos, que los vean. Si te trabas, mano arriba. No sufras en silencio. Tres, la más importante: NO partas la pantalla. No intentes ver el slide y tu n8n al tiempo. Me miras a mí. Cuando yo haga alt-tab y diga 'ahora tú', cambias tú. Es como bailar: primero miras, después repites.",
+  "[⏰ Marcador de tiempo: Minuto 9] Antes de tocar nada, teoría express. Cualquier app del mundo — Instagram, tu banco, Rappi, Netflix — tiene tres bloques. El frontend, que es lo que tú ves y tocas, los botones, las fotos. El backend, que decide qué pasa cuando haces clic — es invisible, vive en servidores lejos. Y la database, donde viven los datos: fotos, saldos, pedidos. Estos tres bloques están separados. Cada uno hace una cosa y solo una cosa. Grábate este dibujo, porque todo lo que sigue se explica con él.",
+  "[⏰ Marcador de tiempo: Minuto 11] El problema: los tres bloques están aislados. El frontend no sabe hablar con la database directamente. Necesitan tubitos que los conecten. Esos tubitos tienen dos nombres técnicos que aterran: APIs y Webhooks. Pero relájate. Una API es simplemente 'oye bloque, pásame este dato' — uno pregunta, el otro contesta. Un Webhook es al revés: 'oye bloque, cuando pase algo, avísame' — como una notificación. Tubitos. Enchufes. Nada más. Todo lo que vas a construir hoy es conectar enchufes.",
+  "[⏰ Marcador de tiempo: Minuto 13] Ejemplo número uno: Instagram. Cuando tú ves una foto en el feed, la foto NO está en tu celular. Repito: no está en tu celular. Tu celular es solo el frontend — un lector de fotos. La foto vive en los servidores de Meta, en la database. Por eso, cuando se te cae el internet, ya no ves nada. Porque el frontend se quedó solo. Cada scroll que tú haces, el frontend le pide a la database la siguiente foto por un tubito. Una API request. Eso es Instagram.",
+  "[⏰ Marcador de tiempo: Minuto 15] Ejemplo dos, más fuerte: Nubank o Nequi. Tú abres la app y ves un saldo: un millón de pesos. Eso es el frontend. La database, en Brasil o en Colombia, tiene anotado tu saldo. Pero ahora quieres transferir. Tocas 'enviar'. Aquí aparece el backend: un guardia que revisa reglas ANTES de actualizar la database. ¿Tienes saldo? ¿El destinatario existe? ¿Superaste el límite diario? ¿Es un horario válido? Si alguna regla falla, no pasa nada. Si todas pasan, el backend le dice a la database: 'resta un millón aquí, súmalo allá'. Todo esto en menos de un segundo.",
+  "[⏰ Marcador de tiempo: Minuto 18] Los tubitos en la vida real: WhatsApp. Cuando tú le pides a WhatsApp que busque un GIF de Shakira, WhatsApp le pregunta a GIPHY — por un tubito — 'pásame los GIFs de Shakira'. GIPHY responde. Eso es API. Ahora: tienes el celular bloqueado, guardado en el bolsillo. Te llega un mensaje. ¿Cómo aparece la notificación? El teléfono de tu amigo, cuando él mandó el mensaje, le avisó al servidor de WhatsApp. El servidor le avisó al tuyo. Eso es Webhook: el servidor te despertó. Tú no preguntaste. Él te avisó. Con estos dos tubitos — preguntar y avisar — se construye TODO el software del mundo.",
+  "[⏰ Marcador de tiempo: Minuto 20] Arrancamos. Primera construcción. Mira el mapa: Fillout es el frontend — formulario público. La información viaja por un tubito a n8n, el backend que orquesta todo. Y n8n la guarda en Notion, la database. Es un tubo. Un tubo nada más. Los próximos cuarenta minutos vamos a armar ese tubo paso por paso. Si te trabas, mano arriba. No avances sin entender, porque todo lo siguiente se monta encima de este.",
+  "[⏰ Marcador de tiempo: Minuto 22] Arrancamos por el frontend — Fillout. La cara pública del sistema. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: Create a new form. Dos: arranca desde blank — hoy no usamos templates. Tres: tres campos, nada más. Nombre. Correo. Mensaje. Cuatro: Publish el form y copia el link público en un bloc de notas. Cinco: pestaña Integrations, busca Webhook, déjalo abierto — en el próximo paso te vas a devolver a pegarle una URL. Por ahora, el form ya existe y es público. Seguimos con el backend.",
+  "[⏰ Marcador de tiempo: Minuto 30] Ahora el backend del sistema: n8n. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: arriba a la derecha, Create Workflow. Dos: nómbralo 'Taller Ignia - Leads'. Tres: en el canvas vacío, Add first step. Cuatro: busca WEBHOOK y selecciónalo. Cinco: método, cambia GET a POST. Seis: clic en LISTEN FOR TEST EVENT — se queda esperando, el tubito está vivo. Copia la URL de prueba. Siete, importante: alt-tab a Fillout, a la integración que dejaste abierta, pega la URL ahí, Save. Devuélvete a n8n. El webhook sigue listening. Ya Fillout y n8n hablan.",
+  "[⏰ Marcador de tiempo: Minuto 38] Falta la database: Notion. Sin memoria no hay sistema. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: abre el link de 'Lead Tracker' del chat del taller. Dos: arriba a la derecha, botón DUPLICATE. Tres: Notion te pregunta a qué workspace — escoge el tuyo. Cuatro: confirma que en tu barra lateral izquierda aparece una página nueva llamada 'Lead Tracker'. Pulgar arriba si la ves. Si no, mano arriba y viene copiloto.",
+  "[⏰ Marcador de tiempo: Minuto 43] Para que n8n pueda entrar a Notion, una llave. Notion, con razón, no deja entrar a cualquiera. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: arriba a la derecha, clic en tu foto de perfil. Dos: Settings. Tres: barra lateral, Connections. Cuatro: abajo de todo, 'Develop or manage integrations' — se abre pestaña nueva. Cinco: botón azul NEW INTEGRATION. Nómbrala 'Taller Ignia'. Submit. Seis: copia el INTERNAL INTEGRATION SECRET — empieza por ntn_ o secret_ — y pégala en un bloc temporal. Esa es tu llave.",
+  "[⏰ Marcador de tiempo: Minuto 48] Ojo con este paso. Es el que más falla. Tener la llave NO sirve si la puerta tiene seguro. Hay que pararse frente a la puerta de 'Lead Tracker' y decirle: 'Taller Ignia, tú puedes entrar aquí'. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: vuelve a 'Lead Tracker' en Notion. Dos: arriba a la derecha, los tres puntitos. Tres: Connections → Connect to. Cuatro: busca 'Taller Ignia', clic, Confirm. Listo. Puerta abierta. Si algo no funciona en el siguiente paso, la mitad de las veces la solución está aquí.",
+  "[⏰ Marcador de tiempo: Minuto 52] Volvemos a n8n a cerrar el tubo. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: al lado del Webhook, botón con un más. Dos: busca 'Notion'. Tres: escoge 'Create a database page'. Cuatro: en el campo Credential, 'Create new credential'. Cinco: pega la llave del bloc de notas. Save. Seis: abajo, campo Database, busca 'Lead Tracker'. Si aparece, aplaudimos. Si no aparece, te saltaste 'abrir la puerta' — no te afanes, nos devolvemos dos slides. Siete: mapea los campos. Name → Nombre. Email → Correo. Message → Mensaje.",
+  "[⏰ Marcador de tiempo: Minuto 60] Alto. Manos fuera del teclado. Checkpoint. No avanzamos hasta que todos estén en la misma página — literalmente. Chequea dos cosas: uno, tu Webhook en n8n dice 'listening for test event'. Dos, tu nodo Notion tiene 'Lead Tracker' cargado sin círculos rojos. Si es sí a las dos, levanta la mano. Copilotos, recorran. No arrancamos el siguiente paso hasta que este salón sea un mar de manos.",
+  "[⏰ Marcador de tiempo: Minuto 68] Prepárate. Abre el link del formulario en otra pestaña, como si fueras tu propio cliente. Nombre. Correo. Mensaje cualquiera — 'hola, quiero información'. Submit. Sin hablar, devuélvete a n8n. Mira el Webhook. Mira el Notion. Ahora abre tu 'Lead Tracker'. Miren, gente. ESO que acaba de aparecer ahí, sin que tú lo escribieras — eso es lo que hacen los sistemas automatizados. Y lo construiste tú. Aplauso.",
+  "[⏰ Marcador de tiempo: Minuto 75] Parte difícil pasó. Ahora: inyectarle IA al sistema. La buena noticia — para n8n, la inteligencia artificial es otro nodo. Otra cajita. Gatillo y acción. Sin magia nueva. Lo único distinto es que en vez de 'guarda este dato' le decimos 'léelo, piénsalo, devuélveme un resumen'. Metemos OpenAI entre el Webhook y el Notion. La IA es la acción. Tú eres el director.",
+  "[⏰ Marcador de tiempo: Minuto 80] Para hablar con la IA, otra llave — igual que Notion. Pero esta te la comparto yo, para que no gastes créditos tuyos esta noche. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. En el chat del taller, documento fijado con una llave sk-. Cópiala. Uno: en n8n, al lado del Notion, clic en el más. Dos: busca OPENAI. Tres: acción 'Message a model'. Cuatro: Credential, 'Create new'. Cinco: pega la llave. Save. Seis: modelo, gpt-4o-mini — rápido y barato, perfecto para hoy. Siete: reordena: Webhook → OpenAI → Notion.",
+  "[⏰ Marcador de tiempo: Minuto 86] El prompt. No intentes leerlo y repetirlo — cópialo del chat del taller, tal cual. Uno: en el nodo OpenAI busca el campo User Message. Dos: pega el texto completo. Tres, el truco: donde aparece la variable mensaje_cliente, bórrala y arrastra el campo mensaje que viene del Webhook. Cuatro: le pedimos tres cosas a la IA — un resumen en una línea, una prioridad alta media baja, y un borrador de respuesta en tono cercano. Cinco: conecta la salida del OpenAI al Notion. Mapea resumen y prioridad a sus columnas.",
+  "[⏰ Marcador de tiempo: Minuto 90] Segundo checkpoint. Manos fuera del teclado. Mira tu flujo. Debe verse así: Webhook → OpenAI → Notion. Tres cajitas, dos cuerditas. Ninguna con círculo rojo. Copilotos, recorran. Si alguien tiene nodo desconectado o error, lo resolvemos ahorita. Lo que sigue es la demo más divertida de la noche.",
+  "[⏰ Marcador de tiempo: Minuto 92] Última misión del bloque. Abre tu formulario en otra pestaña. Con toda la mala intención, escribe como si fueras tu peor cliente. Ese que escribe a las once de la noche con urgencia, mal ortografía, y tres preguntas mezcladas. Mándalo. Vuelve a Notion. Mira: la IA ya te resumió el enredo. Ya lo clasificó como prioridad alta. Ya te dejó un borrador listo para que solo le cambies una coma y le des enviar. Eso. ESO. Es el conserje. Y desde hoy, es tuyo. A comer.",
+  "[⏰ Marcador de tiempo: Minuto 95] Veinte minutos de pausa. Comida allá. Pero te pido una cosa: mientras comes, piensa en UNA tarea de tu empresa — una sola — donde este conserje te cambiaría la vida. Cotizaciones. Candidatos. Pedidos. Reclamos. Y cuando vuelvas, te sientas con alguien que no conocías y se lo cuentas en dos minutos. No es networking por networking. Es gasolina para lo que sigue.",
+  "[⏰ Marcador de tiempo: Minuto 115] Bienvenidos. Hasta ahora Notion ha sido solo database — solo guarda. Pero Notion también puede HABLAR. También puede ser gatillo. Cada vez que tú, a mano, cambias el status de un lead a 'Aprobado', queremos que se dispare automáticamente un correo. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: nuevo workflow — 'Taller Ignia - Mensajero Inverso'. Dos: Add first step, busca NOTION, escoge el TRIGGER 'On database page updated'. Tres: selecciona tu base Lead Tracker. Cuatro: condición, Status = Aprobado. Save. Cinco: Listen for event. Déjalo escuchando.",
+  "[⏰ Marcador de tiempo: Minuto 125] Acción: mandar correo. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: al lado del Notion Trigger, botón más. Dos: busca GMAIL. Tres: acción 'Send a message'. Cuatro: Credentials, Create new, clic en 'Sign in with Google'. Se abre ventana, logueas, aceptas permisos. Cinco: campo To, arrastra el correo del lead. Subject, 'Tu solicitud fue aprobada'. Body, arrastra el borrador que la IA ya generó en el paso anterior. Seis: activa el workflow con el switch arriba a la derecha.",
+  "[⏰ Marcador de tiempo: Minuto 135] Checkpoint final. Abre Notion, 'Lead Tracker'. Elige un lead cualquiera. Cambia su status a Aprobado. Mira tu bandeja de correo. En menos de veinte segundos va a llegar — a tu propio correo — un mensaje que tú nunca escribiste. Lo escribió la IA. Lo disparó Notion. Lo envió Gmail. Tú solo cambiaste un status. Copilotos, confirmen que a todos les llegó. Si a alguien no, noventa por ciento de las veces es un permiso de Google sin aceptar.",
+  "[⏰ Marcador de tiempo: Minuto 140] Veinticinco minutos de exploración libre. Con reglas. Abre n8n, pestaña Templates. Busca SOLO con una de estas tres frases: 'Shopify', 'Sheets' o 'Instagram'. Escoge un template que se parezca a algo que tú haces todos los lunes. Copilotos divididos en tres esquinas — cada esquina, una búsqueda. Si estás con Shopify, vas a la esquina Shopify. No intentes hacer algo gigantesco. Construye algo que te ahorre quince minutos de tu semana. No más. La ambición mata talleres.",
+  "[⏰ Marcador de tiempo: Minuto 165] Manos fuera del teclado. Mira tu pantalla. Hace tres horas, muchos no sabían qué era un webhook. Hace tres horas, muchos jamás habían abierto n8n. Y ahora tienes — corriendo, en tu cuenta, tuyo para siempre — un formulario que recibe clientes, una IA que los clasifica y contesta, una base de datos que los organiza, y un disparador que envía correos solos. Esto es arquitectura de empresa. Literal. La misma que usa cualquier startup grande. La construiste tú. Aplauso largo, para ti, no para mí.",
+  "[⏰ Marcador de tiempo: Minuto 170] Cerrar con algo que decimos mucho en Ignia. La IA es el camino, no la meta. Tu negocio no es hacer flujos de n8n. Tu negocio es vender más, atender mejor, vivir más liviano. Automatizar es comprarte de vuelta tu propio tiempo. No te enamores de la herramienta. Enamórate del problema. El día que n8n no te sirva, cámbialo. El día que OpenAI no te sirva, cámbialo. Pero la disciplina de preguntar 'esta tarea aburrida, ¿la puedo delegar?' — esa, no la sueltes nunca.",
+  "[⏰ Marcador de tiempo: Minuto 175] Una última cosa. No me importa si mañana replicas este taller entero. Lo que me importa: mañana, antes del mediodía, escoge UNA tarea aburrida de quince minutos y automatízala. Una. No tres. No diez. Una. Y me la mandas a @ignia en Instagram. Si quieres seguir en esto, los Jueves de Coworking son gratis cada semana, y el próximo Action Lab abre inscripciones la otra semana. Gracias por confiarnos tu noche. Nos vemos el jueves. Con fuego."
+]
+</script>
+
+<style>
+  :root{ --paper:#fafaf8; --line:#e4e1d9; --muted-ink:#6b6d74; }
+  html,body{margin:0;background:#000;}
+  deck-stage{background:#000;}
+  deck-stage section{ font-family:var(--font-sans); color:var(--foreground); background:var(--paper); overflow:hidden; }
+  .eyebrow-lg{ font-family:var(--font-display); font-weight:700; text-transform:uppercase; letter-spacing:.18em; font-size:26px; color:var(--brand-orange); }
+  h1.slide-title, h2.slide-title{ font-family:var(--font-display); font-weight:700; letter-spacing:-0.02em; line-height:1.02; margin:0; }
+  .k-xl{ font-size:120px; } .k-lg{ font-size:96px; } .k-md{ font-size:72px; } .k-sm{ font-size:56px; }
+  .pad{ position:absolute; inset:0; padding:88px 110px 80px; box-sizing:border-box; display:flex; flex-direction:column; }
+  .flame-bar{ height:10px; width:160px; border-radius:999px; background:var(--flame-gradient); }
+  .flame-rule{ height:4px; width:100%; border-radius:999px; background:var(--flame-gradient); }
+  .footer-chrome{ position:absolute; left:110px; right:110px; bottom:40px; display:flex; align-items:center; justify-content:space-between; font-family:var(--font-display); font-weight:500; letter-spacing:.14em; text-transform:uppercase; font-size:24px; color:var(--muted-ink); }
+  .on-dark .footer-chrome{ color:rgba(255,255,255,.55); }
+  .step{ display:flex; align-items:flex-start; gap:28px; padding:20px 0; border-top:1px solid var(--line); }
+  .step:first-child{ border-top:none; }
+  .step-num{ font-family:var(--font-display); font-weight:700; font-size:40px; color:var(--brand-orange); width:84px; flex:none; letter-spacing:-0.02em; line-height:1; }
+  .step-text{ font-family:var(--font-sans); font-size:30px; line-height:1.25; color:#151821; flex:1; }
+  .step-text kbd{ font-family:var(--font-mono); font-size:.88em; background:#0b0f1a; color:#fff; padding:4px 10px; border-radius:6px; margin:0 2px; font-weight:500; }
+  .step-text em{ font-style:normal; color:var(--brand-orange); font-weight:600; }
+  .pill{ display:inline-flex; align-items:center; gap:14px; padding:14px 28px; border-radius:9999px; font-family:var(--font-display); font-weight:600; font-size:26px; background:#fff; color:#0b0f1a; border:1px solid var(--line); }
+  .pill .dot{ width:10px; height:10px; background:var(--brand-orange); border-radius:99px; }
+  .pill-dark{ background:rgba(255,255,255,.08); color:#fff; border-color:rgba(255,255,255,.18); }
+  .alt-tab-chip{ display:inline-flex; align-items:center; gap:14px; padding:16px 26px; border-radius:9999px; background:#0b0f1a; color:#fff; font-family:var(--font-display); font-weight:600; font-size:26px; letter-spacing:.02em; }
+  .alt-tab-chip .kb{ font-family:var(--font-mono); font-weight:500; background:rgba(255,255,255,.12); padding:6px 12px; border-radius:8px; font-size:24px; }
+  .alt-tab-chip .flame{ color:var(--brand-orange); font-size:28px; }
+  .time-chip{ display:inline-flex; align-items:center; gap:14px; padding:12px 22px; border-radius:9999px; background:rgba(219,105,52,.1); border:1px solid rgba(219,105,52,.35); color:var(--brand-orange); font-family:var(--font-display); font-weight:700; font-size:24px; letter-spacing:.14em; text-transform:uppercase; }
+  .flow-card{ background:#fff; border:1px solid var(--line); border-radius:24px; padding:32px 30px; display:flex; flex-direction:column; gap:12px; box-shadow:0 10px 15px -3px rgba(0,0,0,.07); min-width:0; }
+  .flow-card .role{ font-family:var(--font-display); font-weight:700; text-transform:uppercase; letter-spacing:.14em; font-size:24px; color:var(--muted-ink); }
+  .flow-card .name{ font-family:var(--font-display); font-weight:700; font-size:42px; letter-spacing:-0.015em; line-height:1; }
+  .flow-card .desc{ font-size:24px; line-height:1.4; color:#3b3d45; }
+  .flow-card.accent{ background:#0b0f1a; color:#fff; border-color:#0b0f1a; }
+  .flow-card.accent .role{ color:rgba(255,255,255,.55); }
+  .flow-card.accent .desc{ color:rgba(255,255,255,.75); }
+  .flow-card.fire{ background:rgba(219,105,52,.1); border-color:rgba(219,105,52,.4); }
+  .flow-card.fire .role{ color:var(--brand-orange); }
+  .flow-arrow{ align-self:center; color:var(--brand-orange); font-size:52px; font-family:var(--font-display); font-weight:400; line-height:1; }
+  .on-dark{ background:#0b0f1a !important; color:#fff; }
+  .on-dark .slide-title{ color:#fff; }
+  .on-dark .step-text{ color:rgba(255,255,255,.9); }
+  .on-dark .step{ border-top-color:rgba(255,255,255,.1); }
+  .on-dark .pill{ background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.18); }
+  .on-dark .flow-card{ background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.14); }
+  .on-dark .flow-card .name{ color:#fff; }
+  .on-dark .flow-card .desc{ color:rgba(255,255,255,.7); }
+  .codeblock{ font-family:var(--font-mono); background:#0b0f1a; color:#f5f5f4; border-radius:18px; padding:32px 36px; font-size:26px; line-height:1.6; white-space:pre-wrap; border:1px solid rgba(255,255,255,.08); }
+  .codeblock .cm{ color:#8b90a0; } .codeblock .kw{ color:#f5b73c; } .codeblock .str{ color:#e88654; } .codeblock .var{ color:#db6934; font-weight:600; }
+  .brand-lockup{ display:flex; align-items:center; gap:14px; }
+  .brand-lockup img{ height:40px; display:block; }
+  .checkpoint-banner{ display:inline-flex; align-items:center; gap:16px; background:#0b0f1a; color:#fff; padding:16px 28px; border-radius:9999px; font-family:var(--font-display); font-weight:700; text-transform:uppercase; letter-spacing:.2em; font-size:24px; }
+  .checkpoint-banner .bar{ width:30px; height:4px; background:var(--brand-orange); border-radius:99px; }
+  .flex-center{ display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; }
+  .steps-2{ display:grid; grid-template-columns:1fr 1fr; column-gap:80px; }
+  .note{ font-size:24px; color:var(--muted-ink); line-height:1.45; }
+  .flame-watermark{ position:absolute; pointer-events:none; font-family:var(--font-display); font-weight:800; color:rgba(219,105,52,.08); font-size:920px; line-height:.8; letter-spacing:-0.06em; user-select:none; }
+  .title-grid{ position:absolute; inset:0; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 96px 96px; pointer-events:none; }
+  .huge-quote{ font-family:var(--font-display); font-weight:700; font-size:140px; line-height:1; letter-spacing:-0.03em; color:#fff; max-width:1400px; }
+  .huge-quote .flame-word{ background:var(--flame-gradient); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .break-big{ font-family:var(--font-display); font-weight:700; font-size:520px; line-height:.85; letter-spacing:-0.04em; color:#fff; }
+  .sandbox-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .sb-card{ background:#fff; border:1px solid var(--line); border-radius:22px; padding:32px; display:flex; flex-direction:column; gap:10px; }
+  .sb-card .q{ font-family:var(--font-mono); font-size:26px; color:var(--brand-orange); font-weight:500; }
+  .sb-card .n{ font-family:var(--font-display); font-weight:700; font-size:36px; letter-spacing:-0.015em; line-height:1.05; }
+  .sb-card .d{ font-size:24px; line-height:1.4; color:#3b3d45; }
+  .done-item{ display:flex; align-items:center; gap:22px; padding:16px 0; border-bottom:1px solid rgba(255,255,255,.1); font-family:var(--font-display); font-weight:600; font-size:36px; letter-spacing:-0.01em; color:#fff; }
+  .done-item .mark{ width:44px; height:44px; border-radius:99px; background:var(--brand-orange); color:#fff; display:grid; place-items:center; flex:none; }
+  .done-item .mark svg{ width:24px; height:24px; }
+  /* diagram block for architecture slides */
+  .arch-block{ display:flex; flex-direction:column; gap:14px; padding:40px 34px; border-radius:24px; background:#fff; border:1px solid var(--line); box-shadow:0 10px 15px -3px rgba(0,0,0,.07); min-width:0; }
+  .arch-block .ab-role{ font-family:var(--font-display); font-weight:700; font-size:24px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted-ink); }
+  .arch-block .ab-title{ font-family:var(--font-display); font-weight:700; font-size:56px; letter-spacing:-0.02em; line-height:1; }
+  .arch-block .ab-desc{ font-size:26px; line-height:1.35; color:#3b3d45; }
+  .arch-block.fire{ background:rgba(219,105,52,.08); border-color:rgba(219,105,52,.35); }
+  .arch-block.fire .ab-role{ color:var(--brand-orange); }
+  .arch-block.dark{ background:#0b0f1a; color:#fff; border-color:#0b0f1a; }
+  .arch-block.dark .ab-role{ color:rgba(255,255,255,.55); }
+  .arch-block.dark .ab-desc{ color:rgba(255,255,255,.72); }
+  .tube{ position:relative; display:flex; align-items:center; justify-content:center; min-width:80px; }
+  .tube-label{ font-family:var(--font-mono); font-size:18px; color:var(--brand-orange); background:#fff; border:1px solid rgba(219,105,52,.35); border-radius:999px; padding:4px 10px; white-space:nowrap; position:absolute; top:-22px; left:50%; transform:translateX(-50%); }
+  .tube-line{ height:4px; width:100%; background:linear-gradient(90deg, rgba(219,105,52,.3), rgba(219,105,52,.9), rgba(219,105,52,.3)); border-radius:999px; }
+  .tube-line.vertical{ height:100%; width:4px; background:linear-gradient(180deg, rgba(219,105,52,.3), rgba(219,105,52,.9), rgba(219,105,52,.3)); }
+  .tube-arrow{ color:var(--brand-orange); font-size:40px; line-height:1; font-family:var(--font-display); }
+</style>
+</head>
+
+<body>
+<deck-stage width="1920" height="1080">
+
+<!-- 1 PORTADA -->
+<section data-label="01 Portada" class="on-dark">
+  <div class="title-grid"></div>
+  <div class="flame-watermark" style="bottom:-340px; right:-120px;">🔥</div>
+  <div class="pad">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <div class="brand-lockup"><img src="assets/logo-dark.png" alt="Ignia"/></div>
+      <div class="time-chip">Miércoles · 6:00 — 9:00 PM · Bogotá</div>
+    </div>
+    <div style="margin-top:auto;">
+      <div class="eyebrow-lg">Action Lab · Sesión práctica</div>
+      <h1 class="slide-title" style="font-size:196px; margin-top:24px; color:#fff;">Deja de hacer<br/>cosas<br/><span style="background:var(--flame-gradient); -webkit-background-clip:text; background-clip:text; color:transparent;">a mano.</span></h1>
+      <div style="display:flex; align-items:center; gap:32px; margin-top:48px;">
+        <div class="flame-bar"></div>
+        <div style="font-family:var(--font-display); font-weight:500; font-size:30px; color:rgba(255,255,255,.7);">Automatización + IA en 3 horas · con Salomón Muriel</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-chrome"><span>Ignia · Gente con fuego 🔥</span><span>01 / 30</span></div>
+</section>
+
+<!-- 2 PROMESA -->
+<section data-label="02 La promesa">
+  <div class="pad">
+    <div class="eyebrow-lg">La promesa</div>
+    <h2 class="slide-title k-lg" style="margin-top:24px; max-width:1500px;">Sales con un sistema<br/><span class="text-gradient-fire">funcionando</span>. De verdad.</h2>
+    <div style="margin-top:70px; display:grid; grid-template-columns:repeat(5,1fr); gap:20px;">
+      <div class="flow-card"><div class="role">Frontend</div><div class="name">Form</div><div class="desc">Un formulario público donde tus clientes escriben.</div></div>
+      <div class="flow-card fire"><div class="role">Backend</div><div class="name">n8n</div><div class="desc">Conecta todo. Gatillo + acción.</div></div>
+      <div class="flow-card"><div class="role">IA</div><div class="name">OpenAI</div><div class="desc">Resume, prioriza, arma el borrador de respuesta.</div></div>
+      <div class="flow-card"><div class="role">Database</div><div class="name">Notion</div><div class="desc">Todo ordenado. Nunca más un lead perdido en DMs.</div></div>
+      <div class="flow-card accent"><div class="role">Gatillo</div><div class="name">Auto-envío</div><div class="desc">Cambias un estado → se manda el correo solo.</div></div>
+    </div>
+    <div style="margin-top:auto; display:flex; align-items:center; gap:24px;">
+      <div class="time-chip">3 horas · 5 herramientas · 0 código</div>
+      <div class="note">Todo lo construyes <b>tú</b>. Si no te funciona al final, te devuelvo el tiempo.</div>
+    </div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>02 / 30</span></div>
+</section>
+
+<!-- 3 ABRE TUS CUENTAS -->
+<section data-label="03 Abre tus cuentas">
+  <div class="pad">
+    <div class="eyebrow-lg">Antes de arrancar</div>
+    <h2 class="slide-title k-lg" style="margin-top:20px;">Abre tus cuentas <span style="color:var(--brand-orange);">ya</span>.</h2>
+    <div class="note" style="margin-top:12px; font-size:26px;">Escanea el QR con tu celular. Si ya tienes cuenta, solo loguéate.</div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:32px; margin-top:40px;">
+      <div style="background:#fff; border:1px solid var(--line); border-radius:22px; padding:28px; display:flex; flex-direction:column; align-items:center; gap:16px; box-shadow:0 10px 15px -3px rgba(0,0,0,.07);">
+        <div style="background:#fff; padding:10px; border-radius:14px; border:1px solid var(--line);"><img src="assets/qr-fillout.svg" alt="fillout.com" style="width:300px; height:300px; display:block;"/></div>
+        <div style="font-family:var(--font-display); font-weight:700; font-size:40px; letter-spacing:-0.015em;">Fillout</div>
+        <div style="font-family:var(--font-mono); font-size:22px; color:var(--brand-orange);">fillout.com</div>
+        <div class="note" style="text-align:center; font-size:20px;">Frontend · formulario público</div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:22px; padding:28px; display:flex; flex-direction:column; align-items:center; gap:16px; box-shadow:0 10px 15px -3px rgba(0,0,0,.07);">
+        <div style="background:#fff; padding:10px; border-radius:14px; border:1px solid var(--line);"><img src="assets/qr-n8n.svg" alt="automation.ignia.lat" style="width:300px; height:300px; display:block;"/></div>
+        <div style="font-family:var(--font-display); font-weight:700; font-size:40px; letter-spacing:-0.015em;">n8n · Ignia</div>
+        <div style="font-family:var(--font-mono); font-size:22px; color:var(--brand-orange);">automation.ignia.lat</div>
+        <div class="note" style="text-align:center; font-size:20px;">Backend · conecta todo</div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:22px; padding:28px; display:flex; flex-direction:column; align-items:center; gap:16px; box-shadow:0 10px 15px -3px rgba(0,0,0,.07);">
+        <div style="background:#fff; padding:10px; border-radius:14px; border:1px solid var(--line);"><img src="assets/qr-notion.svg" alt="notion.com" style="width:300px; height:300px; display:block;"/></div>
+        <div style="font-family:var(--font-display); font-weight:700; font-size:40px; letter-spacing:-0.015em;">Notion</div>
+        <div style="font-family:var(--font-mono); font-size:22px; color:var(--brand-orange);">notion.com</div>
+        <div class="note" style="text-align:center; font-size:20px;">Database · base de datos</div>
+      </div>
+    </div>
+    <div style="margin-top:auto; display:flex; align-items:center; gap:24px; flex-wrap:wrap;">
+      <span class="alt-tab-chip"><span class="flame">🕹️</span> El método Alt-Tab <span class="kb">⌘ Tab</span> <span class="kb">Alt Tab</span></span>
+      <div class="note">Si alguna no carga, <b style="color:var(--brand-orange);">mano arriba</b> — copiloto a tu lado.</div>
+    </div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>03 / 30</span></div>
+</section>
+
+<!-- 4 ANATOMÍA · 3 BLOQUES -->
+<section data-label="04 Anatomía de un sistema">
+  <div class="pad">
+    <div class="eyebrow-lg">Lección relámpago · 1 de 5</div>
+    <h2 class="slide-title k-lg" style="margin-top:24px; max-width:1600px;">Toda app tiene <span class="text-gradient-fire">3 bloques</span>.</h2>
+    <div style="margin-top:auto; margin-bottom:80px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:40px;">
+      <div class="arch-block"><div class="ab-role">01</div><div class="ab-title">Frontend</div><div class="ab-desc">Lo que tú ves y tocas. La pantalla, los botones, las fotos.</div></div>
+      <div class="arch-block fire"><div class="ab-role">02</div><div class="ab-title">Backend</div><div class="ab-desc">Invisible. Decide qué pasa cuando haces clic. Vive en servidores lejos.</div></div>
+      <div class="arch-block dark"><div class="ab-role">03</div><div class="ab-title">Database</div><div class="ab-desc">Donde viven los datos. Saldos, pedidos, fotos, mensajes.</div></div>
+    </div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>04 / 30</span></div>
+</section>
+
+<!-- 5 CONECTORES / APIs Webhooks -->
+<section data-label="05 Los conectores">
+  <div class="pad">
+    <div class="eyebrow-lg">Lección relámpago · 2 de 5</div>
+    <h2 class="slide-title k-lg" style="margin-top:24px; max-width:1600px;">Tubitos que los <span class="text-gradient-fire">conectan</span>.</h2>
+    <div style="margin-top:80px; display:grid; grid-template-columns:1fr 100px 1fr 100px 1fr; gap:0; align-items:stretch;">
+      <div class="arch-block"><div class="ab-role">01</div><div class="ab-title">Frontend</div></div>
+      <div class="tube"><div class="tube-label">API / Webhook</div><div class="tube-line"></div></div>
+      <div class="arch-block fire"><div class="ab-role">02</div><div class="ab-title">Backend</div></div>
+      <div class="tube"><div class="tube-label">API / Webhook</div><div class="tube-line"></div></div>
+      <div class="arch-block dark"><div class="ab-role">03</div><div class="ab-title">Database</div></div>
+    </div>
+    <div style="margin-top:56px; display:grid; grid-template-columns:1fr 1fr; gap:56px;">
+      <div><div style="font-family:var(--font-display); font-weight:700; font-size:40px; letter-spacing:-0.015em; color:#0b0f1a;">API — "pregunto, me contestas"</div><div style="font-size:26px; color:#3b3d45; line-height:1.4; margin-top:8px;">Uno pide un dato, el otro responde. Como un mesero que trae lo que pediste.</div></div>
+      <div><div style="font-family:var(--font-display); font-weight:700; font-size:40px; letter-spacing:-0.015em; color:#0b0f1a;">Webhook — "cuando pase algo, me avisas"</div><div style="font-size:26px; color:#3b3d45; line-height:1.4; margin-top:8px;">Uno se queda esperando. El otro le avisa. Como una notificación.</div></div>
+    </div>
+    <div style="margin-top:auto;"><div class="flame-rule" style="width:220px;"></div></div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>05 / 30</span></div>
+</section>
+
+<!-- 6 INSTAGRAM -->
+<section data-label="06 Instagram · ejemplo">
+  <div class="pad">
+    <div class="eyebrow-lg">Ejemplo · Instagram</div>
+    <h2 class="slide-title k-md" style="margin-top:16px; max-width:1600px;">La foto <span class="text-gradient-fire">no está</span> en tu celular.</h2>
+    <div style="margin-top:60px; display:grid; grid-template-columns: 1fr 120px 1fr; gap:0; align-items:stretch;">
+      <div class="arch-block">
+        <div class="ab-role">Frontend</div>
+        <div class="ab-title">Tu celular</div>
+        <div class="ab-desc">El feed, los likes, los comentarios, los stories. Solo los <em style="font-style:normal; color:var(--brand-orange);">muestra</em>.</div>
+        <div style="margin-top:14px; font-family:var(--font-mono); font-size:20px; color:var(--muted-ink);">📱 App de Instagram</div>
+      </div>
+      <div class="tube"><div class="tube-label">API</div><div class="tube-line"></div></div>
+      <div class="arch-block dark">
+        <div class="ab-role">Database</div>
+        <div class="ab-title">Servidores de Meta</div>
+        <div class="ab-desc">Donde viven todas las fotos, videos y mensajes del mundo. Miles de discos duros en EE.UU.</div>
+        <div style="margin-top:14px; font-family:var(--font-mono); font-size:20px; color:rgba(255,255,255,.6);">🏢 meta.com/datacenters</div>
+      </div>
+    </div>
+    <div style="margin-top:48px; background:rgba(219,105,52,.08); border:1px solid rgba(219,105,52,.3); border-radius:18px; padding:28px 32px;">
+      <div style="font-family:var(--font-display); font-weight:700; font-size:32px; letter-spacing:-0.01em; color:#0b0f1a;">Prueba simple:</div>
+      <div style="font-size:26px; color:#3b3d45; line-height:1.4; margin-top:6px;">Desactiva tu internet y abre Instagram. El feed se queda mudo — el frontend se quedó sin database.</div>
+    </div>
+    <div style="margin-top:auto;"><div class="flame-rule" style="width:180px;"></div></div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>06 / 30</span></div>
+</section>
+
+<!-- 7 NUBANK -->
+<section data-label="07 Nubank · ejemplo">
+  <div class="pad">
+    <div class="eyebrow-lg">Ejemplo · Nubank / Nequi</div>
+    <h2 class="slide-title k-md" style="margin-top:16px; max-width:1600px;">El <span class="text-gradient-fire">guardia</span> revisa antes de mover plata.</h2>
+    <div style="margin-top:50px; display:grid; grid-template-columns: 1fr 80px 1.15fr 80px 1fr; gap:0; align-items:stretch;">
+      <div class="arch-block">
+        <div class="ab-role">Frontend</div>
+        <div class="ab-title">App</div>
+        <div class="ab-desc">Ves tu saldo. Tocas "enviar".</div>
+      </div>
+      <div class="tube"><div class="tube-label">API</div><div class="tube-line"></div></div>
+      <div class="arch-block fire">
+        <div class="ab-role">Backend · Guardia</div>
+        <div class="ab-title">Reglas</div>
+        <div class="ab-desc" style="color:#3b3d45;">¿Tienes saldo? ¿El destinatario existe? ¿Superaste el límite diario? ¿Es hora permitida? <em style="font-style:normal; color:var(--brand-orange); font-weight:600;">Todo tiene que decir sí</em>.</div>
+      </div>
+      <div class="tube"><div class="tube-label">API</div><div class="tube-line"></div></div>
+      <div class="arch-block dark">
+        <div class="ab-role">Database</div>
+        <div class="ab-title">Registro</div>
+        <div class="ab-desc">Resta aquí. Suma allá. Todo se anota.</div>
+      </div>
+    </div>
+    <div style="margin-top:60px; font-family:var(--font-display); font-weight:600; font-size:32px; color:#0b0f1a; letter-spacing:-0.01em; max-width:1500px; line-height:1.3;">
+      Sin el backend, cualquiera transferiría plata que no tiene. <em style="font-style:normal; color:var(--brand-orange);">El backend es el que protege las reglas.</em>
+    </div>
+    <div style="margin-top:auto;"><div class="flame-rule" style="width:180px;"></div></div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>07 / 30</span></div>
+</section>
+
+<!-- 8 WHATSAPP -->
+<section data-label="08 WhatsApp · los tubitos">
+  <div class="pad">
+    <div class="eyebrow-lg">Ejemplo · WhatsApp</div>
+    <h2 class="slide-title k-md" style="margin-top:16px; max-width:1600px;">Los tubitos en vivo: <span class="text-gradient-fire">preguntar</span> y <span class="text-gradient-fire">avisar</span>.</h2>
+
+    <div style="margin-top:50px; display:grid; grid-template-columns:1fr 1fr; gap:40px;">
+      <!-- API caso -->
+      <div style="background:#fff; border:1px solid var(--line); border-radius:22px; padding:32px; display:flex; flex-direction:column; gap:16px;">
+        <div class="eyebrow-lg" style="font-size:22px;">Caso API — pregunto</div>
+        <div style="font-family:var(--font-display); font-weight:700; font-size:38px; letter-spacing:-0.015em; line-height:1.1;">Buscar un GIF de Shakira</div>
+        <div style="display:grid; grid-template-columns:1fr 60px 1fr; align-items:center; gap:0; margin-top:8px;">
+          <div style="background:#0b0f1a; color:#fff; padding:16px 18px; border-radius:14px; font-family:var(--font-display); font-weight:600; font-size:24px;">WhatsApp</div>
+          <div class="tube"><div class="tube-line"></div><div style="position:absolute; top:-24px; font-family:var(--font-mono); font-size:18px; color:var(--brand-orange);">API</div></div>
+          <div style="background:#fff; border:1px solid var(--line); padding:16px 18px; border-radius:14px; font-family:var(--font-display); font-weight:600; font-size:24px;">GIPHY</div>
+        </div>
+        <div style="font-size:24px; color:#3b3d45; line-height:1.4;">WhatsApp <em style="font-style:normal; color:var(--brand-orange); font-weight:600;">pregunta</em> a GIPHY por los GIFs. GIPHY responde. Tú ves los GIFs.</div>
+      </div>
+      <!-- Webhook caso -->
+      <div style="background:#fff; border:1px solid var(--line); border-radius:22px; padding:32px; display:flex; flex-direction:column; gap:16px;">
+        <div class="eyebrow-lg" style="font-size:22px;">Caso Webhook — me avisan</div>
+        <div style="font-family:var(--font-display); font-weight:700; font-size:38px; letter-spacing:-0.015em; line-height:1.1;">Notificación con celular bloqueado</div>
+        <div style="display:grid; grid-template-columns:1fr 60px 1fr; align-items:center; gap:0; margin-top:8px;">
+          <div style="background:#fff; border:1px solid var(--line); padding:16px 18px; border-radius:14px; font-family:var(--font-display); font-weight:600; font-size:24px;">Cel amigo</div>
+          <div class="tube"><div class="tube-line"></div><div style="position:absolute; top:-24px; font-family:var(--font-mono); font-size:18px; color:var(--brand-orange);">Webhook</div></div>
+          <div style="background:#0b0f1a; color:#fff; padding:16px 18px; border-radius:14px; font-family:var(--font-display); font-weight:600; font-size:24px;">Tu celular</div>
+        </div>
+        <div style="font-size:24px; color:#3b3d45; line-height:1.4;">Tú no preguntas nada. El otro <em style="font-style:normal; color:var(--brand-orange); font-weight:600;">te avisa</em>. Tu celular suena.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:auto;"><div style="font-family:var(--font-display); font-weight:600; font-size:32px; color:#0b0f1a; letter-spacing:-0.01em;">Con estos dos tubitos se construye <em style="font-style:normal; color:var(--brand-orange);">todo</em> el software del mundo.</div></div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>08 / 30</span></div>
+</section>
+
+<!-- 9 MAPA DE HOY -->
+<section data-label="09 El mapa de hoy" class="on-dark">
+  <div class="pad">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <div class="eyebrow-lg">Construcción guiada · 1 de 3</div>
+      <div class="time-chip">⏰ Min 20 — 68</div>
+    </div>
+    <h2 class="slide-title k-lg" style="margin-top:24px; color:#fff;">El <span class="text-gradient-fire">mapa</span> de hoy.</h2>
+    <div style="margin-top:auto; margin-bottom:80px; display:grid; grid-template-columns: 1fr 100px 1fr 100px 1fr; gap:0; align-items:stretch;">
+      <div class="arch-block" style="background:#fff; color:#0b0f1a;">
+        <div class="ab-role">Frontend</div>
+        <div class="ab-title">Fillout</div>
+        <div class="ab-desc">Formulario público. Tu cliente escribe aquí.</div>
+      </div>
+      <div class="tube"><div class="tube-label">Webhook</div><div class="tube-line"></div></div>
+      <div class="arch-block" style="background:rgba(219,105,52,.15); border-color:rgba(219,105,52,.4); color:#fff;">
+        <div class="ab-role" style="color:var(--brand-orange);">Backend</div>
+        <div class="ab-title" style="color:#fff;">n8n</div>
+        <div class="ab-desc" style="color:rgba(255,255,255,.75);">Recibe, enruta, guarda.</div>
+      </div>
+      <div class="tube"><div class="tube-label">API</div><div class="tube-line"></div></div>
+      <div class="arch-block" style="background:#fff; color:#0b0f1a;">
+        <div class="ab-role">Database</div>
+        <div class="ab-title">Notion</div>
+        <div class="ab-desc">Base de datos "Lead Tracker".</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-chrome"><span>Build 1 · El tubo principal</span><span>09 / 30</span></div>
+</section>
+
+<!-- 10 FILLOUT -->
+<section data-label="10 Fillout · El formulario">
+  <div class="pad">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div><div class="eyebrow-lg">Paso 1 · El formulario</div><h2 class="slide-title k-md" style="margin-top:14px;">Arma tu form en <span class="text-gradient-fire">Fillout</span>.</h2></div>
+      <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a Fillout</div>
+    </div>
+    <div class="steps-2" style="margin-top:48px;">
+      <div>
+        <div class="step"><div class="step-num">01</div><div class="step-text"><kbd>Create a new form</kbd> → desde <em>blank</em>.</div></div>
+        <div class="step"><div class="step-num">02</div><div class="step-text">3 campos: <em>Nombre, Correo, Mensaje</em>.</div></div>
+        <div class="step"><div class="step-num">03</div><div class="step-text"><em>Publish</em> el form.</div></div>
+      </div>
+      <div>
+        <div class="step"><div class="step-num">04</div><div class="step-text">Pestaña <kbd>Integrations</kbd> → busca <em>Webhook</em>.</div></div>
+        <div class="step"><div class="step-num">05</div><div class="step-text">Déjalo <em>abierto</em>. Volveremos a pegar la URL.</div></div>
+        <div class="step"><div class="step-num">06</div><div class="step-text">Copia el link público del form en un bloc.</div></div>
+      </div>
+    </div>
+    <div style="margin-top:auto;"><div class="note">Menos es más. Hoy solo 3 campos. La URL de n8n la pegamos en el paso 2.</div></div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>10 / 30</span></div>
+</section>
+
+<!-- 11 N8N WEBHOOK -->
+<section data-label="11 n8n · El tubito de entrada">
+  <div class="pad">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div><div class="eyebrow-lg">Paso 2 · El backend · tubito de entrada</div><h2 class="slide-title k-md" style="margin-top:14px;">Monta tu <span class="text-gradient-fire">Webhook</span> en n8n.</h2></div>
+      <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a n8n</div>
+    </div>
+    <div class="steps-2" style="margin-top:48px;">
+      <div>
+        <div class="step"><div class="step-num">01</div><div class="step-text"><kbd>Create Workflow</kbd>. Nómbralo <em>"Taller Ignia — Leads"</em>.</div></div>
+        <div class="step"><div class="step-num">02</div><div class="step-text"><kbd>Add first step</kbd> → busca <em>Webhook</em>.</div></div>
+        <div class="step"><div class="step-num">03</div><div class="step-text">Método: de <kbd>GET</kbd> a <kbd>POST</kbd>.</div></div>
+      </div>
+      <div>
+        <div class="step"><div class="step-num">04</div><div class="step-text">Clic <em>Listen for test event</em>. <em>Copia</em> la URL.</div></div>
+        <div class="step"><div class="step-num">05</div><div class="step-text">🕹️ ALT-TAB a <em>Fillout</em> → pega la URL → <kbd>Save</kbd>.</div></div>
+        <div class="step"><div class="step-num">06</div><div class="step-text">Vuelve a n8n. El webhook sigue <em>listening</em>.</div></div>
+      </div>
+    </div>
+    <div style="margin-top:auto;"><div class="note">Ahora Fillout ya sabe a dónde mandar los datos. Falta la base de datos.</div></div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>11 / 30</span></div>
+</section>
+
+<!-- 12 NOTION DUPLICATE -->
+<section data-label="12 Notion · Duplicar template">
+  <div class="pad">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div><div class="eyebrow-lg">Paso 3 · La base de datos</div><h2 class="slide-title k-md" style="margin-top:14px;">Duplica el template<br/><span class="text-gradient-fire">Lead Tracker</span>.</h2></div>
+      <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a Notion</div>
+    </div>
+    <div style="margin-top:48px;">
+      <div class="step"><div class="step-num">01</div><div class="step-text">Abre el link <em>"Lead Tracker"</em> que te compartí en el chat.</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-text">Arriba a la derecha, clic en <kbd>Duplicate</kbd>.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-text">Escoge <em>tu workspace</em> cuando Notion te pregunte.</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-text">Confirma que <em>Lead Tracker</em> aparece en tu sidebar. 👍 pulgar.</div></div>
+    </div>
+    <div style="margin-top:auto;"><div class="note">Si no lo ves, mano arriba. Copiloto a tu lado.</div></div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>12 / 30</span></div>
+</section>
+
+<!-- 13 NOTION API KEY -->
+<section data-label="13 Notion · Crear llave">
+  <div class="pad">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div><div class="eyebrow-lg">Paso 4 · Seguridad Notion · 1 de 2</div><h2 class="slide-title k-md" style="margin-top:14px;">Crea tu llave de <span class="text-gradient-fire">Notion API</span>.</h2></div>
+      <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a Notion</div>
+    </div>
+    <div class="steps-2" style="margin-top:48px;">
+      <div>
+        <div class="step"><div class="step-num">01</div><div class="step-text">Clic en tu <em>foto de perfil</em> (arriba a la derecha).</div></div>
+        <div class="step"><div class="step-num">02</div><div class="step-text">Abre <kbd>Settings</kbd>.</div></div>
+        <div class="step"><div class="step-num">03</div><div class="step-text">Barra lateral: <kbd>Connections</kbd>.</div></div>
+      </div>
+      <div>
+        <div class="step"><div class="step-num">04</div><div class="step-text">Abajo: <em>Develop or manage integrations</em>.</div></div>
+        <div class="step"><div class="step-num">05</div><div class="step-text"><kbd>New integration</kbd> → <em>"Taller Ignia"</em> → Submit.</div></div>
+        <div class="step"><div class="step-num">06</div><div class="step-text">Copia el <em>Internal Integration Secret</em> 🔑 en un bloc.</div></div>
+      </div>
+    </div>
+    <div style="margin-top:auto;"><div class="note">La llave empieza por <code style="font-family:var(--font-mono); background:#eee; padding:2px 8px; border-radius:6px;">ntn_…</code> o <code style="font-family:var(--font-mono); background:#eee; padding:2px 8px; border-radius:6px;">secret_…</code></div></div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>13 / 30</span></div>
+</section>
+
+<!-- 14 NOTION PERMISSIONS -->
+<section data-label="14 Notion · Abrir permisos">
+  <div class="pad">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div><div class="eyebrow-lg" style="color:var(--brand-orange);">⚠ Paso 5 · Seguridad Notion · 2 de 2 · el que todos olvidan</div><h2 class="slide-title k-md" style="margin-top:14px;">La llave no sirve<br/>si la puerta tiene <span class="text-gradient-fire">seguro</span>.</h2></div>
+      <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a Notion</div>
+    </div>
+    <div style="margin-top:48px;">
+      <div class="step"><div class="step-num">01</div><div class="step-text">Vuelve a tu página <em>Lead Tracker</em>.</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-text">Arriba a la derecha, los <em>tres puntitos</em> <kbd>⋯</kbd>.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-text"><kbd>Connections</kbd> → <kbd>Connect to</kbd>.</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-text">Busca <em>Taller Ignia</em> → clic → <em>Confirm</em>.</div></div>
+    </div>
+    <div style="margin-top:auto;"><div class="note"><b style="color:var(--brand-orange);">Ojo:</b> sin este paso, n8n no verá la base. Es el error #1 del taller.</div></div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>14 / 30</span></div>
+</section>
+
+<!-- 15 CONNECT NOTION IN N8N -->
+<section data-label="15 n8n · Nodo Notion">
+  <div class="pad">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div><div class="eyebrow-lg">Paso 6 · Conecta los tubos</div><h2 class="slide-title k-md" style="margin-top:14px;">Vuelve a n8n. Agrega <span class="text-gradient-fire">Notion</span>.</h2></div>
+      <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a n8n</div>
+    </div>
+    <div class="steps-2" style="margin-top:48px;">
+      <div>
+        <div class="step"><div class="step-num">01</div><div class="step-text">Al lado del Webhook, botón <kbd>+</kbd>.</div></div>
+        <div class="step"><div class="step-num">02</div><div class="step-text">Busca <em>Notion</em> → <em>"Create a database page"</em>.</div></div>
+        <div class="step"><div class="step-num">03</div><div class="step-text">Credential: <em>Create new credential</em>.</div></div>
+      </div>
+      <div>
+        <div class="step"><div class="step-num">04</div><div class="step-text">Pega el <em>Internal Integration Secret</em> 🔑 → <kbd>Save</kbd>.</div></div>
+        <div class="step"><div class="step-num">05</div><div class="step-text">Database: busca <em>Lead Tracker</em>.</div></div>
+        <div class="step"><div class="step-num">06</div><div class="step-text">Mapea: <em>Name → Nombre</em>, <em>Email → Correo</em>, <em>Message → Mensaje</em>.</div></div>
+      </div>
+    </div>
+    <div style="margin-top:auto;"><div class="note">¿No aparece <em style="font-style:normal; color:var(--brand-orange); font-weight:600;">Lead Tracker</em>? Te saltaste abrir la puerta. Slide 14.</div></div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>15 / 30</span></div>
+</section>
+
+<!-- 16 CHECKPOINT 1 -->
+<section data-label="16 Checkpoint 1" class="on-dark">
+  <div class="flame-watermark" style="bottom:-340px; right:-120px;">🔥</div>
+  <div class="pad">
+    <div class="checkpoint-banner"><span class="bar"></span> Checkpoint visual · 1 de 3</div>
+    <h2 class="slide-title k-lg" style="margin-top:28px; color:#fff; max-width:1500px;">Manos <span class="text-gradient-fire">fuera</span> del teclado.</h2>
+    <div style="font-family:var(--font-display); font-weight:500; font-size:38px; color:rgba(255,255,255,.78); margin-top:20px;">Levanta la mano si ves las dos cosas:</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:40px;">
+      <div style="border:1px solid rgba(255,255,255,.14); border-radius:22px; padding:32px; background:rgba(255,255,255,.04);">
+        <div style="font-family:var(--font-display); font-weight:700; font-size:26px; color:var(--brand-orange); letter-spacing:.14em; text-transform:uppercase;">Debe decir</div>
+        <div style="font-family:var(--font-mono); font-size:38px; margin-top:14px; color:#fff; line-height:1.25;">Webhook → listening<br/>for test event</div>
+      </div>
+      <div style="border:1px solid rgba(255,255,255,.14); border-radius:22px; padding:32px; background:rgba(255,255,255,.04);">
+        <div style="font-family:var(--font-display); font-weight:700; font-size:26px; color:var(--brand-orange); letter-spacing:.14em; text-transform:uppercase;">Debe verse</div>
+        <div style="font-family:var(--font-mono); font-size:38px; margin-top:14px; color:#fff; line-height:1.25;">Notion · Lead Tracker<br/><span style="color:rgba(255,255,255,.6);">sin círculos rojos</span></div>
+      </div>
+    </div>
+    <div style="margin-top:auto; font-family:var(--font-display); font-weight:600; font-size:30px; color:rgba(255,255,255,.8);">Copilotos, recorran. No avanzamos hasta que sea un mar de manos.</div>
+  </div>
+  <div class="footer-chrome"><span>Checkpoint · Build 1</span><span>16 / 30</span></div>
+</section>
+
+<!-- 17 AHA -->
+<section data-label="17 Momento aha" class="on-dark">
+  <div class="flame-watermark" style="top:-260px; left:-160px;">🔥</div>
+  <div class="pad flex-center">
+    <div class="eyebrow-lg">Minuto 68 · primer milagro</div>
+    <div style="font-family:var(--font-display); font-weight:700; font-size:280px; line-height:.85; letter-spacing:-0.04em; color:#fff; margin-top:28px; text-align:center;">
+      Dale<br/><span style="background:var(--flame-gradient); -webkit-background-clip:text; background-clip:text; color:transparent;">Submit.</span>
+    </div>
+    <div style="font-family:var(--font-display); font-weight:500; font-size:38px; line-height:1.25; color:rgba(255,255,255,.75); margin-top:40px; max-width:1500px; text-align:center;">
+      Mira tu Notion. Ese registro apareció solo.<br/>Nadie lo escribió. Esa es la magia.
+    </div>
+    <div style="margin-top:52px; display:flex; gap:20px; align-items:center;">
+      <div class="pill pill-dark"><span class="dot"></span>Fillout</div>
+      <div style="color:var(--brand-orange); font-size:40px;">→</div>
+      <div class="pill pill-dark"><span class="dot"></span>n8n</div>
+      <div style="color:var(--brand-orange); font-size:40px;">→</div>
+      <div class="pill pill-dark"><span class="dot"></span>Notion</div>
+    </div>
+  </div>
+  <div class="footer-chrome"><span>Aplauso 👏</span><span>17 / 30</span></div>
+</section>
+
+<!-- 18 BUILD 2 DIAGRAM -->
+<section data-label="18 Build 2 · Inyectar IA" class="on-dark">
+  <div class="pad">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <div class="eyebrow-lg">Construcción guiada · 2 de 3</div>
+      <div class="time-chip">⏰ Min 75 — 95</div>
+    </div>
+    <h2 class="slide-title k-lg" style="margin-top:24px; color:#fff;">Inyéctale <span class="text-gradient-fire">IA</span>.</h2>
+    <div style="font-family:var(--font-display); font-weight:500; font-size:32px; color:rgba(255,255,255,.72); margin-top:20px; max-width:1500px; line-height:1.3;">
+      La IA es <em style="font-style:normal; color:var(--brand-orange);">otro nodo más</em>. Gatillo y acción. Sin magia nueva.
+    </div>
+    <div style="margin-top:auto; margin-bottom:70px; display:grid; grid-template-columns: 1fr 60px 1fr 60px 1fr 60px 1fr; gap:0; align-items:stretch;">
+      <div class="arch-block" style="background:#fff; color:#0b0f1a;"><div class="ab-role">Frontend</div><div class="ab-title">Fillout</div></div>
+      <div class="tube"><div class="tube-line"></div></div>
+      <div class="arch-block" style="background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.14);"><div class="ab-role" style="color:rgba(255,255,255,.55);">Backend</div><div class="ab-title" style="color:#fff;">n8n</div></div>
+      <div class="tube"><div class="tube-line"></div></div>
+      <div class="arch-block" style="background:rgba(219,105,52,.15); border-color:rgba(219,105,52,.4); color:#fff;"><div class="ab-role" style="color:var(--brand-orange);">IA</div><div class="ab-title" style="color:#fff;">OpenAI</div></div>
+      <div class="tube"><div class="tube-line"></div></div>
+      <div class="arch-block" style="background:#fff; color:#0b0f1a;"><div class="ab-role">Database</div><div class="ab-title">Notion</div></div>
+    </div>
+  </div>
+  <div class="footer-chrome"><span>Build 2 · El conserje de IA</span><span>18 / 30</span></div>
+</section>
+
+<!-- 19 OPENAI KEY -->
+<section data-label="19 OpenAI · Llave maestra">
+  <div class="pad">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div><div class="eyebrow-lg">Paso 4 · La llave maestra</div><h2 class="slide-title k-md" style="margin-top:14px;">Pega la llave de <span class="text-gradient-fire">OpenAI</span>.</h2></div>
+      <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a n8n</div>
+    </div>
+    <div style="margin-top:34px; display:flex; gap:24px; align-items:center;">
+      <div style="background:#0b0f1a; color:#fff; padding:16px 24px; border-radius:14px; font-family:var(--font-mono); font-size:26px;">sk-•••••••••••••••••••••••••••••</div>
+      <div class="note" style="max-width:700px;">La llave va <em style="font-style:normal; color:var(--brand-orange); font-weight:600;">en el chat del taller</em>. Cópiala de ahí — no gastes créditos tuyos.</div>
+    </div>
+    <div class="steps-2" style="margin-top:34px;">
+      <div>
+        <div class="step"><div class="step-num">01</div><div class="step-text">Al lado del Notion, clic en <kbd>+</kbd>.</div></div>
+        <div class="step"><div class="step-num">02</div><div class="step-text">Busca <em>OpenAI</em> → <em>"Message a model"</em>.</div></div>
+        <div class="step"><div class="step-num">03</div><div class="step-text">Credential: <em>Create new</em>.</div></div>
+      </div>
+      <div>
+        <div class="step"><div class="step-num">04</div><div class="step-text">Pega la llave <em>sk-…</em> → <kbd>Save</kbd>.</div></div>
+        <div class="step"><div class="step-num">05</div><div class="step-text">Modelo: <em>gpt-4o-mini</em>.</div></div>
+        <div class="step"><div class="step-num">06</div><div class="step-text">Reordena: <em>Webhook → OpenAI → Notion</em>.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>19 / 30</span></div>
+</section>
+
+<!-- 20 PROMPT -->
+<section data-label="20 El prompt" class="on-dark">
+  <div class="pad">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div><div class="eyebrow-lg">Paso 5 · El prompt</div><h2 class="slide-title k-md" style="margin-top:14px; color:#fff;">La instrucción para la <span class="text-gradient-fire">IA</span>.</h2></div>
+      <div class="pill pill-dark"><span class="dot"></span>Pégalo en el campo <em style="font-style:normal; color:var(--brand-orange); font-weight:600;">&nbsp;User message</em></div>
+    </div>
+    <div class="codeblock" style="margin-top:30px;"><span class="cm"># Eres el conserje de leads de mi negocio.</span>
+<span class="cm"># Tu trabajo: leer el mensaje del cliente y devolver SOLO un JSON con:</span>
+
+{
+  "<span class="kw">resumen</span>"  : <span class="str">"una línea, máximo 15 palabras"</span>,
+  "<span class="kw">prioridad</span>": <span class="str">"alta | media | baja"</span>,
+  "<span class="kw">borrador</span>" : <span class="str">"respuesta en tono cercano, en español colombiano, &lt;80 palabras"</span>
+}
+
+<span class="cm"># Mensaje del cliente:</span>
+<span class="var">{{ $json.body.mensaje }}</span>   <span class="cm">← arrastra este campo del Webhook</span></div>
+    <div style="margin-top:auto; font-family:var(--font-display); font-weight:500; font-size:26px; color:rgba(255,255,255,.7);">Conecta la salida al Notion. Mapea <em style="font-style:normal; color:var(--brand-orange);">resumen</em> y <em style="font-style:normal; color:var(--brand-orange);">prioridad</em> a sus columnas.</div>
+  </div>
+  <div class="footer-chrome"><span>Build 2 · El conserje de IA</span><span>20 / 30</span></div>
+</section>
+
+<!-- 21 CHECKPOINT 2 -->
+<section data-label="21 Checkpoint 2" class="on-dark">
+  <div class="flame-watermark" style="bottom:-340px; right:-120px;">🔥</div>
+  <div class="pad">
+    <div class="checkpoint-banner"><span class="bar"></span> Checkpoint visual · 2 de 3</div>
+    <h2 class="slide-title k-lg" style="margin-top:28px; color:#fff;">Tu flujo debe verse <span class="text-gradient-fire">así</span>.</h2>
+    <div style="margin-top:50px; display:grid; grid-template-columns:1fr 60px 1fr 60px 1fr; gap:0; align-items:stretch;">
+      <div class="arch-block" style="background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.14);"><div class="ab-role" style="color:rgba(255,255,255,.55);">Gatillo</div><div class="ab-title" style="color:#fff;">Webhook</div><div class="ab-desc" style="color:rgba(255,255,255,.65);">listening ✓</div></div>
+      <div class="tube"><div class="tube-line"></div></div>
+      <div class="arch-block" style="background:rgba(219,105,52,.15); color:#fff; border-color:rgba(219,105,52,.4);"><div class="ab-role" style="color:var(--brand-orange);">Acción · IA</div><div class="ab-title" style="color:#fff;">OpenAI</div><div class="ab-desc" style="color:rgba(255,255,255,.65);">gpt-4o-mini ✓</div></div>
+      <div class="tube"><div class="tube-line"></div></div>
+      <div class="arch-block" style="background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.14);"><div class="ab-role" style="color:rgba(255,255,255,.55);">Acción · DB</div><div class="ab-title" style="color:#fff;">Notion</div><div class="ab-desc" style="color:rgba(255,255,255,.65);">Lead Tracker ✓</div></div>
+    </div>
+    <div style="margin-top:52px; font-family:var(--font-display); font-weight:600; font-size:32px; color:#fff;">Tres cajitas. Dos cuerditas. Cero rojos.</div>
+  </div>
+  <div class="footer-chrome"><span>Checkpoint · Build 2</span><span>21 / 30</span></div>
+</section>
+
+<!-- 22 PROBANDO EL CONSERJE -->
+<section data-label="22 Probando el conserje">
+  <div class="pad">
+    <div class="eyebrow-lg">Paso 6 · Estresa a la IA</div>
+    <h2 class="slide-title k-lg" style="margin-top:20px;">Sé tu <span class="text-gradient-fire">peor cliente</span>.</h2>
+    <div style="margin-top:40px; display:grid; grid-template-columns:1.1fr 1fr; gap:40px;">
+      <div style="background:#fff; border:1px solid var(--line); border-radius:22px; padding:32px;">
+        <div style="font-family:var(--font-display); font-weight:700; font-size:20px; text-transform:uppercase; letter-spacing:.14em; color:var(--muted-ink);">Mensaje del formulario</div>
+        <div style="font-size:28px; line-height:1.45; margin-top:16px; color:#1a1c23;">"Hola nesesito cotisacion urgente para un evento el viernes son como 80 personas y tmb queria saber si hacen delivery y si aceptan efectivo gracias!!!"</div>
+        <div class="note" style="margin-top:20px;">Mal ortografía, tres preguntas mezcladas, urgencia. Lo de siempre.</div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        <div style="background:#0b0f1a; color:#fff; border-radius:22px; padding:24px 28px;">
+          <div style="font-family:var(--font-display); font-weight:700; font-size:20px; color:var(--brand-orange); letter-spacing:.14em; text-transform:uppercase;">Resumen</div>
+          <div style="font-size:24px; line-height:1.35; margin-top:8px;">Cliente pide cotización evento 80 pax viernes, delivery y pago efectivo.</div>
+        </div>
+        <div style="background:#0b0f1a; color:#fff; border-radius:22px; padding:24px 28px; display:flex; justify-content:space-between; align-items:center;">
+          <div style="font-family:var(--font-display); font-weight:700; font-size:20px; color:var(--brand-orange); letter-spacing:.14em; text-transform:uppercase;">Prioridad</div>
+          <div style="font-family:var(--font-display); font-weight:700; font-size:40px; color:#fff; letter-spacing:-0.02em;">ALTA</div>
+        </div>
+        <div style="background:#0b0f1a; color:#fff; border-radius:22px; padding:24px 28px;">
+          <div style="font-family:var(--font-display); font-weight:700; font-size:20px; color:var(--brand-orange); letter-spacing:.14em; text-transform:uppercase;">Borrador</div>
+          <div style="font-size:22px; line-height:1.4; margin-top:8px; color:rgba(255,255,255,.85);">"¡Hola! Qué rico. Para 80 personas el viernes sí podemos — te paso la propuesta hoy. Sí hacemos delivery y aceptamos efectivo. ¿A qué hora y dirección?"</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:auto;"><div class="flame-rule" style="width:220px; margin-bottom:14px;"></div><div style="font-family:var(--font-display); font-weight:600; font-size:28px;">Eso. <em style="font-style:normal; color:var(--brand-orange);">Eso</em> es el conserje. Y es tuyo.</div></div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>22 / 30</span></div>
+</section>
+
+<!-- 23 BREAK -->
+<section data-label="23 A comer" class="on-dark">
+  <div class="flame-watermark" style="top:-180px; right:-120px;">🔥</div>
+  <div class="pad flex-center">
+    <div class="eyebrow-lg">Pausa · a comer 🍕</div>
+    <div class="break-big" style="margin-top:14px;"><span style="background:var(--flame-gradient); -webkit-background-clip:text; background-clip:text; color:transparent;">20</span><span style="font-size:180px; color:rgba(255,255,255,.7); margin-left:30px; letter-spacing:-0.02em;">min</span></div>
+    <div style="margin-top:48px; max-width:1500px; text-align:center;"><div style="font-family:var(--font-display); font-weight:500; font-size:40px; line-height:1.3; color:rgba(255,255,255,.85);">Una tarea. Con alguien que no conoces.<br/><em style="font-style:normal; color:var(--brand-orange);">¿Dónde de tu empresa pondrías a tu conserje mañana?</em></div></div>
+    <div style="margin-top:44px; display:flex; gap:20px;">
+      <div class="pill pill-dark"><span class="dot"></span>Cuéntalo en 2 min</div>
+      <div class="pill pill-dark"><span class="dot"></span>Come algo rico</div>
+      <div class="pill pill-dark"><span class="dot"></span>Vuelve a las 8:40</div>
+    </div>
+  </div>
+  <div class="footer-chrome"><span>Pausa · 20 min</span><span>23 / 30</span></div>
+</section>
+
+<!-- 24 REVERSE TRIGGER -->
+<section data-label="24 Notion como gatillo">
+  <div class="pad">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div><div class="eyebrow-lg">Construcción guiada · 3 de 3 · Paso 7</div><h2 class="slide-title k-md" style="margin-top:14px; max-width:1600px;">La base de datos también <span class="text-gradient-fire">habla</span>.</h2></div>
+      <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a n8n</div>
+    </div>
+    <div style="font-family:var(--font-display); font-weight:500; font-size:28px; color:#3b3d45; margin-top:12px; max-width:1500px; line-height:1.35;">Notion deja de ser solo datos. Ahora es <em style="font-style:normal; color:var(--brand-orange); font-weight:700;">gatillo</em>.</div>
+    <div class="steps-2" style="margin-top:36px;">
+      <div>
+        <div class="step"><div class="step-num">01</div><div class="step-text">Nuevo workflow → <em>"Mensajero Inverso"</em>.</div></div>
+        <div class="step"><div class="step-num">02</div><div class="step-text"><kbd>Add first step</kbd> → <em>Notion Trigger</em>.</div></div>
+        <div class="step"><div class="step-num">03</div><div class="step-text">Evento: <em>"On database page updated"</em>.</div></div>
+      </div>
+      <div>
+        <div class="step"><div class="step-num">04</div><div class="step-text">Base: <em>Lead Tracker</em>.</div></div>
+        <div class="step"><div class="step-num">05</div><div class="step-text">Condición: <kbd>Status = Aprobado</kbd>.</div></div>
+        <div class="step"><div class="step-num">06</div><div class="step-text"><kbd>Listen for event</kbd>.</div></div>
+      </div>
+    </div>
+    <div style="margin-top:auto;"><div class="note">Misma lógica: <em style="font-style:normal; color:var(--brand-orange); font-weight:600;">gatillo + acción</em>. Solo cambia quién dispara.</div></div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>24 / 30</span></div>
+</section>
+
+<!-- 25 GMAIL -->
+<section data-label="25 Gmail · El aviso final">
+  <div class="pad">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div><div class="eyebrow-lg">Paso 8 · El aviso final</div><h2 class="slide-title k-md" style="margin-top:14px;">Si <em style="font-style:normal; color:var(--brand-orange);">Aprobado</em> → manda el <span class="text-gradient-fire">correo</span> solo.</h2></div>
+      <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a n8n</div>
+    </div>
+    <div class="steps-2" style="margin-top:48px;">
+      <div>
+        <div class="step"><div class="step-num">01</div><div class="step-text">Al lado del Notion Trigger, clic en <kbd>+</kbd>.</div></div>
+        <div class="step"><div class="step-num">02</div><div class="step-text">Busca <em>Gmail</em> → <em>"Send a message"</em>.</div></div>
+        <div class="step"><div class="step-num">03</div><div class="step-text"><em>Sign in with Google</em> → acepta permisos.</div></div>
+      </div>
+      <div>
+        <div class="step"><div class="step-num">04</div><div class="step-text"><kbd>To</kbd>: arrastra el <em>correo</em> del lead.</div></div>
+        <div class="step"><div class="step-num">05</div><div class="step-text"><kbd>Subject</kbd>: <em>"Tu solicitud fue aprobada"</em>. <kbd>Body</kbd>: <em>borrador</em> de la IA.</div></div>
+        <div class="step"><div class="step-num">06</div><div class="step-text">Activa el workflow con el switch de arriba.</div></div>
+      </div>
+    </div>
+    <div style="margin-top:auto;"><div class="note">Pro tip: usa tu propio correo en el form para la primera prueba.</div></div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>25 / 30</span></div>
+</section>
+
+<!-- 26 CHECKPOINT 3 -->
+<section data-label="26 Checkpoint 3" class="on-dark">
+  <div class="flame-watermark" style="bottom:-340px; left:-120px;">🔥</div>
+  <div class="pad">
+    <div class="checkpoint-banner"><span class="bar"></span> Checkpoint visual · 3 de 3</div>
+    <h2 class="slide-title k-lg" style="margin-top:28px; color:#fff; max-width:1600px;">Cambia un <span class="text-gradient-fire">status</span>.<br/>Mira tu correo.</h2>
+    <div style="display:grid; grid-template-columns:1fr 60px 1fr 60px 1fr; gap:0; align-items:stretch; margin-top:58px;">
+      <div class="arch-block" style="background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.14);"><div class="ab-role" style="color:rgba(255,255,255,.55);">Tu mano</div><div class="ab-title" style="color:#fff;">Notion</div><div class="ab-desc" style="color:rgba(255,255,255,.65);">Status → Aprobado</div></div>
+      <div class="tube"><div class="tube-line"></div></div>
+      <div class="arch-block" style="background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.14);"><div class="ab-role" style="color:rgba(255,255,255,.55);">Backend</div><div class="ab-title" style="color:#fff;">n8n</div><div class="ab-desc" style="color:rgba(255,255,255,.65);">dispara el flujo</div></div>
+      <div class="tube"><div class="tube-line"></div></div>
+      <div class="arch-block" style="background:rgba(219,105,52,.15); color:#fff; border-color:rgba(219,105,52,.4);"><div class="ab-role" style="color:var(--brand-orange);">Acción</div><div class="ab-title" style="color:#fff;">Gmail</div><div class="ab-desc" style="color:rgba(255,255,255,.65);">correo &lt; 20s</div></div>
+    </div>
+    <div style="margin-top:52px; font-family:var(--font-display); font-weight:600; font-size:30px; color:#fff;">¿Te llegó? Pulgar arriba. ¿No? Copilotos, caso en vivo.</div>
+    <div style="font-family:var(--font-display); font-weight:500; font-size:24px; color:rgba(255,255,255,.6); margin-top:12px;">90% de las veces es un permiso de Google sin aceptar.</div>
+  </div>
+  <div class="footer-chrome"><span>Checkpoint · Build 3</span><span>26 / 30</span></div>
+</section>
+
+<!-- 27 SANDBOX -->
+<section data-label="27 Sandbox libre">
+  <div class="pad">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div><div class="eyebrow-lg">Construcción autónoma</div><h2 class="slide-title k-md" style="margin-top:14px;">Espacio libre. <span class="text-gradient-fire">25 minutos</span>.</h2></div>
+      <div class="time-chip">⏰ Min 140 — 165</div>
+    </div>
+    <div style="font-family:var(--font-display); font-weight:500; font-size:30px; color:#3b3d45; margin-top:24px; max-width:1600px; line-height:1.3;">
+      Abre <em style="font-style:normal; color:var(--brand-orange); font-weight:700;">Templates</em> en n8n. Busca con <em style="font-style:normal; color:#0b0f1a;">solo una</em> de estas 3 frases:
+    </div>
+    <div class="sandbox-grid" style="margin-top:34px;">
+      <div class="sb-card"><div class="q">"Shopify"</div><div class="n">E-commerce</div><div class="d">Producto físico. Pedidos, inventario, seguimiento.</div></div>
+      <div class="sb-card"><div class="q">"Sheets"</div><div class="n">Datos que viajan solos</div><div class="d">Servicios y consultorías. Cualquier cosa con hoja de cálculo.</div></div>
+      <div class="sb-card"><div class="q">"Instagram"</div><div class="n">El DM organizado</div><div class="d">Moda, food, marca personal. Lo que llega en DM, ordenado.</div></div>
+    </div>
+    <div style="margin-top:auto; display:flex; align-items:center; gap:24px;">
+      <div class="flame-rule" style="width:180px;"></div>
+      <div style="font-family:var(--font-display); font-weight:600; font-size:26px;">Regla: algo que te ahorre <em style="font-style:normal; color:var(--brand-orange);">15 minutos por semana</em>. No más. La ambición mata talleres.</div>
+    </div>
+    <div style="margin-top:12px;" class="note">Copilotos por esquina — una esquina por búsqueda.</div>
+  </div>
+  <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>27 / 30</span></div>
+</section>
+
+<!-- 28 LOOK WHAT YOU BUILT -->
+<section data-label="28 Lo que construiste" class="on-dark">
+  <div class="flame-watermark" style="top:-180px; right:-120px;">🔥</div>
+  <div class="pad">
+    <div class="eyebrow-lg">El cierre · Minuto 165</div>
+    <h2 class="slide-title k-lg" style="margin-top:22px; color:#fff; max-width:1500px;">Manos fuera del teclado.<br/>Mira <span class="text-gradient-fire">lo que construiste</span>.</h2>
+    <div style="margin-top:50px; max-width:1500px;">
+      <div class="done-item"><div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>Un formulario que recibe clientes.</div>
+      <div class="done-item"><div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>Una IA que los resume y prioriza.</div>
+      <div class="done-item"><div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>Una base de datos viva.</div>
+      <div class="done-item" style="border-bottom:none;"><div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>Un gatillo que envía correos solo.</div>
+    </div>
+    <div style="margin-top:auto; font-family:var(--font-display); font-weight:600; font-size:30px; color:rgba(255,255,255,.75);">Arquitectura de empresa. La misma que usa cualquier startup grande. La construiste <em style="font-style:normal; color:var(--brand-orange);">tú</em>.</div>
+  </div>
+  <div class="footer-chrome"><span>De 0 a IA · en 3 horas</span><span>28 / 30</span></div>
+</section>
+
+<!-- 29 FILOSOFÍA -->
+<section data-label="29 La filosofía" class="on-dark">
+  <div class="pad flex-center">
+    <div class="eyebrow-lg">La filosofía Ignia</div>
+    <div class="huge-quote" style="margin-top:32px; text-align:center;">La IA es el <span class="flame-word">camino</span>,<br/>no la meta.</div>
+    <div style="margin-top:56px; max-width:1400px; text-align:center;"><div style="font-family:var(--font-display); font-weight:500; font-size:34px; line-height:1.35; color:rgba(255,255,255,.78);">Tu negocio no es hacer flujos de n8n.<br/>Tu negocio es <em style="font-style:normal; color:var(--brand-orange);">vender más</em> y <em style="font-style:normal; color:var(--brand-orange);">vivir más liviano</em>.</div></div>
+    <div style="margin-top:50px;"><div class="flame-bar" style="margin:0 auto;"></div></div>
+  </div>
+  <div class="footer-chrome"><span>— Salomón Muriel · Ignia</span><span>29 / 30</span></div>
+</section>
+
+<!-- 30 CIERRE -->
+<section data-label="30 Micro-compromiso">
+  <div class="pad">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <div class="eyebrow-lg">Tu micro-compromiso</div>
+      <div class="brand-lockup"><img src="assets/logo-full.png" alt="Ignia"/></div>
+    </div>
+    <h2 class="slide-title k-lg" style="margin-top:24px; max-width:1700px;">Mañana, <span class="text-gradient-fire">antes del mediodía</span>:<br/>automatiza <em style="font-style:normal;">una</em> tarea aburrida.</h2>
+    <div style="margin-top:40px; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;">
+      <div style="border:1px solid var(--line); border-radius:22px; padding:32px; background:#fff;">
+        <div style="font-family:var(--font-display); font-weight:700; font-size:24px; text-transform:uppercase; letter-spacing:.14em; color:var(--brand-orange);">Las reglas</div>
+        <div style="font-family:var(--font-display); font-weight:700; font-size:44px; margin-top:14px; letter-spacing:-0.015em; line-height:1.1;">Una tarea.<br/>Quince minutos.<br/>Tuyos.</div>
+        <div class="note" style="margin-top:18px;">No 3. No 10. Una. Mándala a <em style="font-style:normal; color:var(--brand-orange); font-weight:700;">@ignia</em> en Instagram y la celebramos.</div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div class="pill" style="align-self:flex-start;"><span class="dot"></span>Jueves de Coworking · gratis · cada semana</div>
+        <div class="pill" style="align-self:flex-start;"><span class="dot"></span>Action Lab · próxima cohorte · inscripciones abiertas</div>
+        <div class="pill" style="align-self:flex-start;"><span class="dot"></span>@ignia · ignia.co · comunidad con fuego 🔥</div>
+      </div>
+    </div>
+    <div style="margin-top:auto; display:flex; align-items:center; gap:24px;">
+      <div class="flame-rule" style="width:300px;"></div>
+      <div style="font-family:var(--font-display); font-weight:700; font-size:36px; letter-spacing:-0.015em;">Gracias, gente con perrenque.</div>
+    </div>
+  </div>
+  <div class="footer-chrome"><span>Ignia · 2026</span><span>30 / 30</span></div>
+</section>
+
+</deck-stage>
+</body>
+</html>

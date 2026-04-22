@@ -1,0 +1,205 @@
+/* Ignia Design System — core tokens
+ * Sourced from ignia-site/src/app/(frontend)/globals.css + tailwind.config.mjs
+ * The brand identity is built around "fire" (fuego): warm orange accent applied
+ * over a neutral slate base, plus the signature multi-color logo gradient.
+ */
+
+/* ---------- Fonts ----------
+ * Two brand families. Montserrat is retained in fonts/ for event-flyer / print
+ * use only — it is NOT part of the web system.
+ *   Space Grotesk → display, eyebrows, buttons, flyer-style type
+ *                   (differentiate via weight + tracking, not via family)
+ *   Geist         → body, paragraphs, inputs, small text, tables
+ * JetBrains Mono (Google Fonts) for code.
+ */
+@font-face {
+  font-family: 'Geist';
+  src: url('./fonts/Geist-VariableFont_wght.ttf') format('truetype-variations'),
+       url('./fonts/Geist-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('./fonts/SpaceGrotesk-VariableFont_wght.ttf') format('truetype-variations'),
+       url('./fonts/SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ===== BRAND ===== */
+  --brand-orange: #db6934;          /* the "Acción" word in the hero; primary fire color */
+  --brand-orange-600: #c4581f;
+  --brand-orange-400: #e88654;
+  --brand-purple-deep: #3d1a5c;     /* leftmost logo bar (dark) */
+  --brand-purple: #6b2d8e;          /* mid logo bar */
+  --brand-yellow: #f5b73c;          /* first logo bar */
+  --brand-plum: #4a1a3f;            /* rightmost logo bar */
+  --flame-gradient: linear-gradient(90deg, #f5b73c 0%, #6b2d8e 20%, #db6934 50%, #6b2d8e 75%, #4a1a3f 100%);
+
+  /* ===== NEUTRAL SCALE (from --foreground/--background in globals.css) ===== */
+  --background: hsl(0 0% 100%);              /* page bg (light) */
+  --foreground: hsl(222.2 84% 4.9%);         /* body text / near-black */
+  --card: hsl(240 5% 96%);                   /* card fill */
+  --card-foreground: hsl(222.2 84% 4.9%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(222.2 84% 4.9%);
+  --muted: hsl(210 40% 96.1%);
+  --muted-foreground: hsl(215.4 16.3% 46.9%);
+  --border: hsl(240 6% 80%);
+  --input: hsl(214.3 31.8% 91.4%);
+  --ring: hsl(222.2 84% 4.9%);
+
+  /* ===== SEMANTIC ROLES =====
+   * The production site uses near-black as --primary and treats orange as an
+   * accent used *inside* gradients. For the design system we expose both, so
+   * designers can pick a slate-primary button OR the fire-primary button. */
+  --primary: hsl(222.2 47.4% 11.2%);         /* slate near-black */
+  --primary-foreground: hsl(210 40% 98%);
+  --fire: var(--brand-orange);               /* the "acción" color */
+  --fire-foreground: #ffffff;
+  --secondary: hsl(210 40% 96.1%);
+  --secondary-foreground: hsl(222.2 47.4% 11.2%);
+  --accent: hsl(210 40% 96.1%);
+  --accent-foreground: hsl(222.2 47.4% 11.2%);
+
+  /* Status */
+  --success: hsl(196 52% 74%);
+  --warning: hsl(34 89% 85%);
+  --error: hsl(10 100% 86%);
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(210 40% 98%);
+
+  --community: hsl(196 60% 38%);             /* the teal used for community CTAs */
+  --whatsapp: #25D366;
+  --whatsapp-dark: #128C7E;
+  --instagram-gradient: linear-gradient(135deg, #833AB4 0%, #E1306C 50%, #F77737 100%);
+
+  /* ===== RADII (from tailwind.config.mjs) ===== */
+  --radius: 0.2rem;                /* base — notably tight */
+  --radius-sm: calc(var(--radius) - 0.04rem);
+  --radius-md: var(--radius);
+  --radius-lg: 0.5rem;              /* cards */
+  --radius-xl: 1rem;                /* large cards */
+  --radius-2xl: 1.5rem;             /* hero cards */
+  --radius-full: 9999px;            /* ALL CTAs are pill-shaped */
+
+  /* ===== SPACING (4-point, matching Tailwind) ===== */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  /* ===== SHADOWS ===== */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.08);
+  --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.06);
+  --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+  --glow-primary: 0 0 20px hsl(222.2 47.4% 11.2% / 0.3);
+  --glow-fire: 0 0 24px rgba(219, 105, 52, 0.35);
+
+  /* ===== TYPE — font families =====
+   * Two-family system. Space Grotesk differentiates itself across roles via
+   * WEIGHT + TRACKING, not via a second family:
+   *   Hero headlines   → 700, -0.02em (tight)
+   *   Section titles   → 700, -0.015em
+   *   Eyebrows         → 500, +0.14em uppercase
+   *   Flyer / banner   → 700–800 uppercase, +0.02em
+   * Use --font-accent for uppercase eyebrows and tags — same family as display,
+   * re-pointed so future swaps stay isolated. */
+  --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk', 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-accent: 'Space Grotesk', 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ===== TYPE — semantic text styles =====
+   * Mirrors the @layer base rules in globals.css. Numbers are the lg: size. */
+  --h1-size: 3.75rem;           /* 60px */
+  --h1-weight: 700;
+  --h1-line: 1.1;
+  --h1-tracking: -0.02em;
+
+  --h2-size: 3rem;              /* 48px */
+  --h2-weight: 700;
+  --h2-line: 1.2;
+  --h2-tracking: -0.015em;
+
+  --h3-size: 2.25rem;           /* 36px */
+  --h3-weight: 600;
+  --h3-line: 1.3;
+  --h3-tracking: -0.01em;
+
+  --h4-size: 1.875rem;          /* 30px */
+  --h4-weight: 600;
+  --h4-line: 1.4;
+
+  --h5-size: 1.5rem;            /* 24px */
+  --h5-weight: 600;
+  --h5-line: 1.4;
+
+  --h6-size: 1.25rem;           /* 20px */
+  --h6-weight: 600;
+  --h6-line: 1.5;
+
+  --body-size: 1.125rem;        /* 18px (md+) */
+  --body-line: 1.7;
+  --body-tracking: 0.01em;
+
+  --small-size: 0.875rem;       /* 14px */
+  --tiny-size: 0.75rem;         /* 12px */
+
+  /* ===== MOTION ===== */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --spring-bouncy: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 200ms;
+  --dur-med: 300ms;
+  --dur-slow: 500ms;
+}
+
+/* ---------- Base element styles ---------- */
+html { font-family: var(--font-sans); }
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 { font-family: var(--font-display); }
+h4, h5, h6 { font-family: var(--font-sans); }
+h1 { font-size: var(--h1-size); font-weight: var(--h1-weight); line-height: var(--h1-line); letter-spacing: var(--h1-tracking); }
+h2 { font-size: var(--h2-size); font-weight: var(--h2-weight); line-height: var(--h2-line); letter-spacing: var(--h2-tracking); }
+h3 { font-size: var(--h3-size); font-weight: var(--h3-weight); line-height: var(--h3-line); letter-spacing: var(--h3-tracking); }
+h4 { font-size: var(--h4-size); font-weight: var(--h4-weight); line-height: var(--h4-line); }
+h5 { font-size: var(--h5-size); font-weight: var(--h5-weight); line-height: var(--h5-line); }
+h6 { font-size: var(--h6-size); font-weight: var(--h6-weight); line-height: var(--h6-line); }
+p  { font-size: var(--body-size); line-height: var(--body-line); letter-spacing: var(--body-tracking); }
+.eyebrow { font-family: var(--font-accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.75rem; }
+code, pre, kbd { font-family: var(--font-mono); }
+
+/* ---------- Signature brand utilities ---------- */
+.text-gradient-foreground {
+  background: linear-gradient(135deg, var(--foreground) 0%, var(--foreground) 50%, rgba(0,0,0,0.55) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.text-gradient-fire {
+  background: linear-gradient(90deg, var(--brand-orange) 0%, var(--brand-orange) 60%, rgba(219,105,52,0.6) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.text-gradient-flame {
+  background: var(--flame-gradient);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.bg-flame-gradient { background: var(--flame-gradient); }
