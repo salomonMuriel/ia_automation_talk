@@ -4,13 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A single-file HTML slide deck for a live workshop ("Automatización + IA — Taller Ignia"). The deck was handed off from Claude Design (see `sesi-n-automatizaci-n-ia/` bundle if still present under `/tmp`). The authored artifact is `Automatizacion IA - Taller.html` — everything else is an asset it pulls in.
+A single-file HTML slide deck for a live workshop ("Automatización + IA — Taller Ignia"). The deck was handed off from Claude Design (see `sesi-n-automatizaci-n-ia/` bundle if still present under `/tmp`). The authored artifact is `index.html` — everything else is an asset it pulls in. Published via GitHub Pages at https://salomonmuriel.github.io/ia_automation_talk/.
 
 ## Preview / dev loop
 
 ```bash
 python3 -m http.server 8765
-# open http://localhost:8765/Automatizacion%20IA%20-%20Taller.html
+# open http://localhost:8765/
 ```
 
 No build step. Edit the HTML, reload the browser. That's the whole loop.
@@ -37,7 +37,7 @@ The deck runs on a **custom web component**, `<deck-stage>`, defined in `deck-st
 
 ## Files
 
-- `Automatizacion IA - Taller.html` — the deck (authored, edited here)
+- `index.html` — the deck (authored, edited here)
 - `Automatizacion IA - Taller v1.html` — the original handoff version, do not edit
 - `tokens.css` — design tokens
 - `deck-stage.js` — the `<deck-stage>` web component (read top comment before modifying)
