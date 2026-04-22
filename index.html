@@ -18,26 +18,26 @@
   "[⏰ Marcador de tiempo: Minuto 18] Los tubitos en la vida real: WhatsApp. Cuando tú le pides a WhatsApp que busque un GIF de Shakira, WhatsApp le pregunta a GIPHY — por un tubito — 'pásame los GIFs de Shakira'. GIPHY responde. Eso es API. Ahora: tienes el celular bloqueado, guardado en el bolsillo. Te llega un mensaje. ¿Cómo aparece la notificación? El teléfono de tu amigo, cuando él mandó el mensaje, le avisó al servidor de WhatsApp. El servidor le avisó al tuyo. Eso es Webhook: el servidor te despertó. Tú no preguntaste. Él te avisó. Con estos dos tubitos — preguntar y avisar — se construye TODO el software del mundo.",
   "[⏰ Marcador de tiempo: Minuto 20] Arrancamos. Primera construcción. Mira el mapa: Fillout es el frontend — formulario público. La información viaja por un tubito a n8n, el backend que orquesta todo. Y n8n la guarda en Notion, la database. Es un tubo. Un tubo nada más. Los próximos cuarenta minutos vamos a armar ese tubo paso por paso. Si te trabas, mano arriba. No avances sin entender, porque todo lo siguiente se monta encima de este.",
   "[⏰ Marcador de tiempo: Minuto 22] Arrancamos por el frontend — Fillout. La cara pública del sistema. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: Create a new form. Dos: arranca desde blank — hoy no usamos templates. Tres: tres campos, nada más. Nombre. Correo. Mensaje. Cuatro: Publish el form y copia el link público en un bloc de notas. Cinco: pestaña Integrations, busca Webhook, déjalo abierto — en el próximo paso te vas a devolver a pegarle una URL. Por ahora, el form ya existe y es público. Seguimos con el backend.",
-  "[⏰ Marcador de tiempo: Minuto 30] Ahora el backend del sistema: n8n. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: arriba a la derecha, Create Workflow. Dos: nómbralo 'Taller Ignia - Leads'. Tres: en el canvas vacío, Add first step. Cuatro: busca WEBHOOK y selecciónalo. Cinco: método, cambia GET a POST. Seis: clic en LISTEN FOR TEST EVENT — se queda esperando, el tubito está vivo. Copia la URL de prueba. Siete, importante: alt-tab a Fillout, a la integración que dejaste abierta, pega la URL ahí, Save. Devuélvete a n8n. El webhook sigue listening. Ya Fillout y n8n hablan.",
-  "[⏰ Marcador de tiempo: Minuto 38] Falta la database: Notion. Sin memoria no hay sistema. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: abre el link de 'Lead Tracker' del chat del taller. Dos: arriba a la derecha, botón DUPLICATE. Tres: Notion te pregunta a qué workspace — escoge el tuyo. Cuatro: confirma que en tu barra lateral izquierda aparece una página nueva llamada 'Lead Tracker'. Pulgar arriba si la ves. Si no, mano arriba y viene copiloto.",
-  "[⏰ Marcador de tiempo: Minuto 43] Para que n8n pueda entrar a Notion, una llave. Notion, con razón, no deja entrar a cualquiera. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: arriba a la derecha, clic en tu foto de perfil. Dos: Settings. Tres: barra lateral, Connections. Cuatro: abajo de todo, 'Develop or manage integrations' — se abre pestaña nueva. Cinco: botón azul NEW INTEGRATION. Nómbrala 'Taller Ignia'. Submit. Seis: copia el INTERNAL INTEGRATION SECRET — empieza por ntn_ o secret_ — y pégala en un bloc temporal. Esa es tu llave.",
-  "[⏰ Marcador de tiempo: Minuto 48] Ojo con este paso. Es el que más falla. Tener la llave NO sirve si la puerta tiene seguro. Hay que pararse frente a la puerta de 'Lead Tracker' y decirle: 'Taller Ignia, tú puedes entrar aquí'. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: vuelve a 'Lead Tracker' en Notion. Dos: arriba a la derecha, los tres puntitos. Tres: Connections → Connect to. Cuatro: busca 'Taller Ignia', clic, Confirm. Listo. Puerta abierta. Si algo no funciona en el siguiente paso, la mitad de las veces la solución está aquí.",
-  "[⏰ Marcador de tiempo: Minuto 52] Volvemos a n8n a cerrar el tubo. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: al lado del Webhook, botón con un más. Dos: busca 'Notion'. Tres: escoge 'Create a database page'. Cuatro: en el campo Credential, 'Create new credential'. Cinco: pega la llave del bloc de notas. Save. Seis: abajo, campo Database, busca 'Lead Tracker'. Si aparece, aplaudimos. Si no aparece, te saltaste 'abrir la puerta' — no te afanes, nos devolvemos dos slides. Siete: mapea los campos. Name → Nombre. Email → Correo. Message → Mensaje.",
-  "[⏰ Marcador de tiempo: Minuto 60] Alto. Manos fuera del teclado. Checkpoint. No avanzamos hasta que todos estén en la misma página — literalmente. Chequea dos cosas: uno, tu Webhook en n8n dice 'listening for test event'. Dos, tu nodo Notion tiene 'Lead Tracker' cargado sin círculos rojos. Si es sí a las dos, levanta la mano. Copilotos, recorran. No arrancamos el siguiente paso hasta que este salón sea un mar de manos.",
-  "[⏰ Marcador de tiempo: Minuto 68] Prepárate. Abre el link del formulario en otra pestaña, como si fueras tu propio cliente. Nombre. Correo. Mensaje cualquiera — 'hola, quiero información'. Submit. Sin hablar, devuélvete a n8n. Mira el Webhook. Mira el Notion. Ahora abre tu 'Lead Tracker'. Miren, gente. ESO que acaba de aparecer ahí, sin que tú lo escribieras — eso es lo que hacen los sistemas automatizados. Y lo construiste tú. Aplauso.",
+  "[⏰ Marcador de tiempo: Minuto 30] Ahora el backend del sistema: n8n. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: arriba a la derecha, Create Workflow. Dos: nómbralo 'Taller Ignia - Tracker'. Tres: en el canvas vacío, Add first step. Cuatro: busca WEBHOOK y selecciónalo. Cinco: método, cambia GET a POST. Seis: clic en EXECUTE WORKFLOW — se queda esperando, el tubito está vivo. Copia la Test URL. Siete, importante: alt-tab a Fillout, a la integración que dejaste abierta, pega la URL ahí, Save. Ocho: ahí mismo en Fillout, clic en TEST — te devuelve Status 200. Eso significa que n8n lo recibió. Ya Fillout y n8n hablan.",
+  "[⏰ Marcador de tiempo: Minuto 38] Falta la database: Notion. Sin memoria no hay sistema. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: en el sidebar izquierdo, botón '+ Add a page'. En el cuerpo escriban slash-database. Dos: escogen 'Database - Full page'. Título de la página: 'Tracker'. Tres: la primera columna dice 'Name' — renómbrenla a 'Nombre'. Cuatro: al lado, botón '+', nueva columna 'Correo' tipo Email. Cinco: otra, 'Mensaje' tipo Text. Seis: última, 'Status' tipo Status — la vamos a usar más adelante. Pulgar arriba cuando vean sus cuatro columnas. Si no, mano arriba y viene copiloto.",
+  "[⏰ Marcador de tiempo: Minuto 43] Para que n8n pueda entrar a Notion, una llave. Notion, con razón, no deja entrar a cualquiera. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: arriba a la izquierda, clic en tu foto de perfil. Dos: Settings. Tres: barra lateral, Connections. Cuatro: abajo de todo, 'Develop or manage connections' — se abre pestaña nueva. Cinco: botón azul NEW INTEGRATION. Nómbrala 'Taller Ignia'. Submit. Seis: copia el INTERNAL INTEGRATION SECRET — empieza por ntn_ o secret_ — y pégala en un bloc temporal. Esa es tu llave.",
+  "[⏰ Marcador de tiempo: Minuto 48] Ojo con este paso. Es el que más falla. Tener la llave NO sirve si la puerta tiene seguro. Hay que pararse frente a la puerta de 'Tracker' y decirle: 'Taller Ignia, tú puedes entrar aquí'. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: vuelve a 'Tracker' en Notion. Dos: arriba a la derecha, los tres puntitos. Tres: Connections → Connect to. Cuatro: busca 'Taller Ignia', clic, Confirm. Listo. Puerta abierta. Si algo no funciona en el siguiente paso, la mitad de las veces la solución está aquí.",
+  "[⏰ Marcador de tiempo: Minuto 52] Volvemos a n8n a cerrar el tubo. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: al lado del Webhook, botón con un más. Dos: busca 'Notion'. Tres: escoge 'Create a database page'. Cuatro: en el campo Credential, 'Create new credential'. Cinco: pega la llave del bloc de notas. Save. Seis: abajo, campo Database, busca 'Tracker'. Si aparece, aplaudimos. Si no aparece, te saltaste 'abrir la puerta' — no te afanes, nos devolvemos dos slides. Siete: mapea los campos. Name → Nombre. Email → Correo. Message → Mensaje.",
+  "[⏰ Marcador de tiempo: Minuto 60] Alto. Manos fuera del teclado. Checkpoint. No avanzamos hasta que todos estén en la misma página — literalmente. Chequea tres cosas: uno, tu form de Fillout está PUBLICADO — con link vivo. Dos, en n8n clic en 'Execute Workflow' y el canvas dice 'Waiting for you to call Test URL'. Tres, tu nodo Notion tiene 'Tracker' cargado sin círculos rojos. Si es sí a las dos, levanta la mano. Copilotos, recorran. No arrancamos el siguiente paso hasta que este salón sea un mar de manos.",
+  "[⏰ Marcador de tiempo: Minuto 68] Prepárate. Abre el link del formulario en otra pestaña, como si fueras tu propio cliente. Nombre. Correo. Mensaje cualquiera — 'hola, quiero información'. Submit. Sin hablar, devuélvete a n8n. Mira el Webhook. Mira el Notion. Ahora abre tu 'Tracker'. Miren, gente. ESO que acaba de aparecer ahí, sin que tú lo escribieras — eso es lo que hacen los sistemas automatizados. Y lo construiste tú. Aplauso.",
   "[⏰ Marcador de tiempo: Minuto 75] Parte difícil pasó. Ahora: inyectarle IA al sistema. La buena noticia — para n8n, la inteligencia artificial es otro nodo. Otra cajita. Gatillo y acción. Sin magia nueva. Lo único distinto es que en vez de 'guarda este dato' le decimos 'léelo, piénsalo, devuélveme un resumen'. Metemos OpenAI entre el Webhook y el Notion. La IA es la acción. Tú eres el director.",
   "[⏰ Marcador de tiempo: Minuto 80] Para hablar con la IA, otra llave — igual que Notion. Pero esta te la comparto yo, para que no gastes créditos tuyos esta noche. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. En el chat del taller, documento fijado con una llave sk-. Cópiala. Uno: en n8n, al lado del Notion, clic en el más. Dos: busca OPENAI. Tres: acción 'Message a model'. Cuatro: Credential, 'Create new'. Cinco: pega la llave. Save. Seis: modelo, gpt-4o-mini — rápido y barato, perfecto para hoy. Siete: reordena: Webhook → OpenAI → Notion.",
-  "[⏰ Marcador de tiempo: Minuto 86] El prompt. No intentes leerlo y repetirlo — cópialo del chat del taller, tal cual. Uno: en el nodo OpenAI busca el campo User Message. Dos: pega el texto completo. Tres, el truco: donde aparece la variable mensaje_cliente, bórrala y arrastra el campo mensaje que viene del Webhook. Cuatro: le pedimos tres cosas a la IA — un resumen en una línea, una prioridad alta media baja, y un borrador de respuesta en tono cercano. Cinco: conecta la salida del OpenAI al Notion. Mapea resumen y prioridad a sus columnas.",
-  "[⏰ Marcador de tiempo: Minuto 90] Segundo checkpoint. Manos fuera del teclado. Mira tu flujo. Debe verse así: Webhook → OpenAI → Notion. Tres cajitas, dos cuerditas. Ninguna con círculo rojo. Copilotos, recorran. Si alguien tiene nodo desconectado o error, lo resolvemos ahorita. Lo que sigue es la demo más divertida de la noche.",
+  "[⏰ Marcador de tiempo: Minuto 86] El prompt. No intentes leerlo y repetirlo — cópialo del chat del taller, tal cual. Uno: en el nodo OpenAI busca el campo User Message. Dos: pega el texto completo. Tres, el truco: donde aparece la variable mensaje_cliente, bórrala y arrastra el campo mensaje que viene del Webhook. Cuatro: le pedimos tres cosas a la IA — un resumen en una línea, una prioridad alta media baja, y un borrador de respuesta en tono cercano. Cinco: abajo del nodo, en Options, agrega 'Output Format'. Type: JSON Object. Verbosity: Medium. Eso obliga al modelo a devolver JSON limpio, no texto suelto. Seis: conecta la salida del OpenAI al Notion. Mapea resumen y prioridad a sus columnas.",
+  "[⏰ Marcador de tiempo: Minuto 90] Antes de conectar, la database necesita dónde escribir. 🕹️ [ALT-TAB A NOTION]. Uno: en tu Tracker, al lado de las columnas actuales, botón '+'. Agreguen tres columnas nuevas, una por una, todas tipo Text: resumen, prioridad, borrador. Dos: 🕹️ alt-tab a n8n, nodo Notion, refresca la lista de campos para que aparezcan. Tres: arrastra la salida del OpenAI — resumen al resumen, prioridad a prioridad, borrador al borrador. Miren el flujo abajo: Webhook → OpenAI → Notion. Tres cajitas, dos cuerditas, cero rojos. Copilotos, recorran. Lo que sigue es la demo más divertida de la noche.",
   "[⏰ Marcador de tiempo: Minuto 92] Última misión del bloque. Abre tu formulario en otra pestaña. Con toda la mala intención, escribe como si fueras tu peor cliente. Ese que escribe a las once de la noche con urgencia, mal ortografía, y tres preguntas mezcladas. Mándalo. Vuelve a Notion. Mira: la IA ya te resumió el enredo. Ya lo clasificó como prioridad alta. Ya te dejó un borrador listo para que solo le cambies una coma y le des enviar. Eso. ESO. Es el conserje. Y desde hoy, es tuyo. A comer.",
   "[⏰ Marcador de tiempo: Minuto 95] Veinte minutos de pausa. Comida allá. Pero te pido una cosa: mientras comes, piensa en UNA tarea de tu empresa — una sola — donde este conserje te cambiaría la vida. Cotizaciones. Candidatos. Pedidos. Reclamos. Y cuando vuelvas, te sientas con alguien que no conocías y se lo cuentas en dos minutos. No es networking por networking. Es gasolina para lo que sigue.",
-  "[⏰ Marcador de tiempo: Minuto 115] Bienvenidos. Hasta ahora Notion ha sido solo database — solo guarda. Pero Notion también puede HABLAR. También puede ser gatillo. Cada vez que tú, a mano, cambias el status de un lead a 'Aprobado', queremos que se dispare automáticamente un correo. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: nuevo workflow — 'Taller Ignia - Mensajero Inverso'. Dos: Add first step, busca NOTION, escoge el TRIGGER 'On database page updated'. Tres: selecciona tu base Lead Tracker. Cuatro: condición, Status = Aprobado. Save. Cinco: Listen for event. Déjalo escuchando.",
-  "[⏰ Marcador de tiempo: Minuto 125] Acción: mandar correo. 🕹️ [ALT-TAB AL SOFTWARE LIVE]. Uno: al lado del Notion Trigger, botón más. Dos: busca GMAIL. Tres: acción 'Send a message'. Cuatro: Credentials, Create new, clic en 'Sign in with Google'. Se abre ventana, logueas, aceptas permisos. Cinco: campo To, arrastra el correo del lead. Subject, 'Tu solicitud fue aprobada'. Body, arrastra el borrador que la IA ya generó en el paso anterior. Seis: activa el workflow con el switch arriba a la derecha.",
-  "[⏰ Marcador de tiempo: Minuto 135] Checkpoint final. Abre Notion, 'Lead Tracker'. Elige un lead cualquiera. Cambia su status a Aprobado. Mira tu bandeja de correo. En menos de veinte segundos va a llegar — a tu propio correo — un mensaje que tú nunca escribiste. Lo escribió la IA. Lo disparó Notion. Lo envió Gmail. Tú solo cambiaste un status. Copilotos, confirmen que a todos les llegó. Si a alguien no, noventa por ciento de las veces es un permiso de Google sin aceptar.",
+  "[⏰ Marcador de tiempo: Minuto 115] Bienvenidos. Hasta ahora Notion ha sido solo database — solo guarda. Pero Notion también puede HABLAR. Y para este build, ni siquiera vamos a usar n8n. Notion sola dispara y manda el correo. Cada vez que tú, a mano, cambias el status de un lead a 'Aprobado', queremos que se dispare automáticamente un correo. 🕹️ [ALT-TAB A NOTION]. Uno: en tu Tracker, arriba a la derecha, icono de rayo — las Automations. Dos: New automation. Nómbrala 'Aprobado → correo'. Tres: el trigger, When Status set to Aprobado. Cuatro: Add action, Send email. Cinco: si es tu primera vez, te pide conectar tu cuenta de Gmail — acepta los permisos. El cuerpo del correo lo armamos en el siguiente slide.",
+  "[⏰ Marcador de tiempo: Minuto 125] Ahora el cuerpo del correo, sin salirnos de Notion. Uno: campo To — arrastra la propiedad Correo de la página. Dos: Subject, escribe 'Tu solicitud fue aprobada'. Tres: en el Body, escribe 'Hola ' y arrastra la propiedad Nombre para personalizarlo. Cuatro: salta un renglón y arrastra la propiedad borrador — esa respuesta que la IA ya escribió cuando llegó el lead. Cinco: Save. Y arriba a la derecha de la automation, enciende el switch — de Off a On.",
+  "[⏰ Marcador de tiempo: Minuto 135] Checkpoint final. Abre Notion, 'Tracker'. Elige un lead cualquiera. Cambia su status a Aprobado. Mira tu bandeja de correo. En menos de veinte segundos va a llegar — a tu propio correo — un mensaje que tú nunca escribiste. Lo escribió la IA en el build 2. Lo disparó y lo mandó Notion — via Gmail. Tú solo cambiaste un status. Sin n8n en el medio. Copilotos, confirmen que a todos les llegó. Si a alguien no, noventa por ciento de las veces es un permiso de Google sin aceptar.",
   "[⏰ Marcador de tiempo: Minuto 140] Veinticinco minutos de exploración libre. Con reglas. Abre n8n, pestaña Templates. Busca SOLO con una de estas tres frases: 'Shopify', 'Sheets' o 'Instagram'. Escoge un template que se parezca a algo que tú haces todos los lunes. Copilotos divididos en tres esquinas — cada esquina, una búsqueda. Si estás con Shopify, vas a la esquina Shopify. No intentes hacer algo gigantesco. Construye algo que te ahorre quince minutos de tu semana. No más. La ambición mata talleres.",
   "[⏰ Marcador de tiempo: Minuto 165] Manos fuera del teclado. Mira tu pantalla. Hace tres horas, muchos no sabían qué era un webhook. Hace tres horas, muchos jamás habían abierto n8n. Y ahora tienes — corriendo, en tu cuenta, tuyo para siempre — un formulario que recibe clientes, una IA que los clasifica y contesta, una base de datos que los organiza, y un disparador que envía correos solos. Esto es arquitectura de empresa. Literal. La misma que usa cualquier startup grande. La construiste tú. Aplauso largo, para ti, no para mí.",
   "[⏰ Marcador de tiempo: Minuto 170] Cerrar con algo que decimos mucho en Ignia. La IA es el camino, no la meta. Tu negocio no es hacer flujos de n8n. Tu negocio es vender más, atender mejor, vivir más liviano. Automatizar es comprarte de vuelta tu propio tiempo. No te enamores de la herramienta. Enamórate del problema. El día que n8n no te sirva, cámbialo. El día que OpenAI no te sirva, cámbialo. Pero la disciplina de preguntar 'esta tarea aburrida, ¿la puedo delegar?' — esa, no la sueltes nunca.",
-  "[⏰ Marcador de tiempo: Minuto 175] Una última cosa. No me importa si mañana replicas este taller entero. Lo que me importa: mañana, antes del mediodía, escoge UNA tarea aburrida de quince minutos y automatízala. Una. No tres. No diez. Una. Y me la mandas a @ignia en Instagram. Si quieres seguir en esto, los Jueves de Coworking son gratis cada semana, y el próximo Action Lab abre inscripciones la otra semana. Gracias por confiarnos tu noche. Nos vemos el jueves. Con fuego."
+  "[⏰ Marcador de tiempo: Minuto 175] Una última cosa. No me importa si replicas este taller entero. Lo que me importa es que esta semana escojas UNA tarea — una sola — que te robe una hora todas las semanas. Y la automatices de verdad. No tres. No diez. Una. Y la subes a Plataforma, a Micro-Retos. Lo que sea: una foto del flujo funcionando, el link del template de Notion, o el JSON exportado de n8n. Cualquiera de las tres sirve. Gracias por confiarnos la noche. Con fuego."
 ]
 </script>
 
@@ -93,6 +93,9 @@
   .checkpoint-banner .bar{ width:30px; height:4px; background:var(--brand-orange); border-radius:99px; }
   .flex-center{ display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; }
   .steps-2{ display:grid; grid-template-columns:1fr 1fr; column-gap:80px; }
+  .steps-column .step{ padding:22px 0; gap:32px; }
+  .steps-column .step-num{ font-size:44px; width:96px; }
+  .steps-column .step-text{ font-size:34px; }
   .note{ font-size:24px; color:var(--muted-ink); line-height:1.45; }
   .flame-watermark{ position:absolute; pointer-events:none; font-family:var(--font-display); font-weight:800; color:rgba(219,105,52,.08); font-size:920px; line-height:.8; letter-spacing:-0.06em; user-select:none; }
   .title-grid{ position:absolute; inset:0; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 96px 96px; pointer-events:none; }
@@ -359,7 +362,7 @@
       <div class="arch-block" style="background:#fff; color:#0b0f1a;">
         <div class="ab-role">Database</div>
         <div class="ab-title">Notion</div>
-        <div class="ab-desc">Base de datos "Lead Tracker".</div>
+        <div class="ab-desc">Base de datos "Tracker".</div>
       </div>
     </div>
   </div>
@@ -373,17 +376,13 @@
       <div><div class="eyebrow-lg">Paso 1 · El formulario</div><h2 class="slide-title k-md" style="margin-top:14px;">Arma tu form en <span class="text-gradient-fire">Fillout</span>.</h2></div>
       <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a Fillout</div>
     </div>
-    <div class="steps-2" style="margin-top:48px;">
-      <div>
-        <div class="step"><div class="step-num">01</div><div class="step-text"><kbd>Create a new form</kbd> → desde <em>blank</em>.</div></div>
-        <div class="step"><div class="step-num">02</div><div class="step-text">3 campos: <em>Nombre, Correo, Mensaje</em>.</div></div>
-        <div class="step"><div class="step-num">03</div><div class="step-text"><em>Publish</em> el form.</div></div>
-      </div>
-      <div>
-        <div class="step"><div class="step-num">04</div><div class="step-text">Pestaña <kbd>Integrations</kbd> → busca <em>Webhook</em>.</div></div>
-        <div class="step"><div class="step-num">05</div><div class="step-text">Déjalo <em>abierto</em>. Volveremos a pegar la URL.</div></div>
-        <div class="step"><div class="step-num">06</div><div class="step-text">Copia el link público del form en un bloc.</div></div>
-      </div>
+    <div class="steps-column" style="margin-top:48px;">
+      <div class="step"><div class="step-num">01</div><div class="step-text"><kbd>Create a new form</kbd> → desde <em>blank</em>.</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-text">3 campos: <em>Nombre, Correo, Mensaje</em>.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-text"><em>Publish</em> el form.</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-text">Pestaña <kbd>Integrations</kbd> → busca <em>Webhook</em>.</div></div>
+      <div class="step"><div class="step-num">05</div><div class="step-text">Déjalo <em>abierto</em>. Volveremos a pegar la URL.</div></div>
+      <div class="step"><div class="step-num">06</div><div class="step-text">Copia el link público del form en un bloc.</div></div>
     </div>
     <div style="margin-top:auto;"><div class="note">Menos es más. Hoy solo 3 campos. La URL de n8n la pegamos en el paso 2.</div></div>
   </div>
@@ -397,37 +396,35 @@
       <div><div class="eyebrow-lg">Paso 2 · El backend · tubito de entrada</div><h2 class="slide-title k-md" style="margin-top:14px;">Monta tu <span class="text-gradient-fire">Webhook</span> en n8n.</h2></div>
       <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a n8n</div>
     </div>
-    <div class="steps-2" style="margin-top:48px;">
-      <div>
-        <div class="step"><div class="step-num">01</div><div class="step-text"><kbd>Create Workflow</kbd>. Nómbralo <em>"Taller Ignia — Leads"</em>.</div></div>
-        <div class="step"><div class="step-num">02</div><div class="step-text"><kbd>Add first step</kbd> → busca <em>Webhook</em>.</div></div>
-        <div class="step"><div class="step-num">03</div><div class="step-text">Método: de <kbd>GET</kbd> a <kbd>POST</kbd>.</div></div>
-      </div>
-      <div>
-        <div class="step"><div class="step-num">04</div><div class="step-text">Clic <em>Listen for test event</em>. <em>Copia</em> la URL.</div></div>
-        <div class="step"><div class="step-num">05</div><div class="step-text">🕹️ ALT-TAB a <em>Fillout</em> → pega la URL → <kbd>Save</kbd>.</div></div>
-        <div class="step"><div class="step-num">06</div><div class="step-text">Vuelve a n8n. El webhook sigue <em>listening</em>.</div></div>
-      </div>
+    <div class="steps-column" style="margin-top:48px;">
+      <div class="step"><div class="step-num">01</div><div class="step-text"><kbd>Create Workflow</kbd>. Nómbralo <em>"Taller Ignia — Tracker"</em>.</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-text"><kbd>Add first step</kbd> → busca <em>Webhook</em>.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-text">Método: de <kbd>GET</kbd> a <kbd>POST</kbd>.</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-text">Clic <kbd>Execute Workflow</kbd>. <em>Copia</em> la Test URL.</div></div>
+      <div class="step"><div class="step-num">05</div><div class="step-text">🕹️ ALT-TAB a <em>Fillout</em> → pega la URL → <kbd>Save</kbd>.</div></div>
+      <div class="step"><div class="step-num">06</div><div class="step-text">En Fillout, clic <kbd>Test</kbd> → <em>Status 200</em> ✓ funcionó.</div></div>
     </div>
     <div style="margin-top:auto;"><div class="note">Ahora Fillout ya sabe a dónde mandar los datos. Falta la base de datos.</div></div>
   </div>
   <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>11 / 30</span></div>
 </section>
 
-<!-- 12 NOTION DUPLICATE -->
-<section data-label="12 Notion · Duplicar template">
+<!-- 12 NOTION DB CREATE -->
+<section data-label="12 Notion · Crear la database">
   <div class="pad">
     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-      <div><div class="eyebrow-lg">Paso 3 · La base de datos</div><h2 class="slide-title k-md" style="margin-top:14px;">Duplica el template<br/><span class="text-gradient-fire">Lead Tracker</span>.</h2></div>
+      <div><div class="eyebrow-lg">Paso 3 · La base de datos</div><h2 class="slide-title k-md" style="margin-top:14px;">Arma tu database<br/><span class="text-gradient-fire">Tracker</span>.</h2></div>
       <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a Notion</div>
     </div>
-    <div style="margin-top:48px;">
-      <div class="step"><div class="step-num">01</div><div class="step-text">Abre el link <em>"Lead Tracker"</em> que te compartí en el chat.</div></div>
-      <div class="step"><div class="step-num">02</div><div class="step-text">Arriba a la derecha, clic en <kbd>Duplicate</kbd>.</div></div>
-      <div class="step"><div class="step-num">03</div><div class="step-text">Escoge <em>tu workspace</em> cuando Notion te pregunte.</div></div>
-      <div class="step"><div class="step-num">04</div><div class="step-text">Confirma que <em>Lead Tracker</em> aparece en tu sidebar. 👍 pulgar.</div></div>
+    <div class="steps-column" style="margin-top:48px;">
+      <div class="step"><div class="step-num">01</div><div class="step-text">Sidebar: <kbd>+ Add a page</kbd>. En el cuerpo escribe <kbd>/database</kbd>.</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-text">Escoge <em>Database - Full page</em>. Título: <em>Tracker</em>.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-text">Renombra la columna <em>Name</em> → <em>Nombre</em>.</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-text"><kbd>+</kbd> nueva columna: <em>Correo</em> · tipo <kbd>Email</kbd>.</div></div>
+      <div class="step"><div class="step-num">05</div><div class="step-text"><kbd>+</kbd>: <em>Mensaje</em> · tipo <kbd>Text</kbd>.</div></div>
+      <div class="step"><div class="step-num">06</div><div class="step-text"><kbd>+</kbd>: <em>Status</em> · tipo <kbd>Status</kbd>. (Lo usaremos después.)</div></div>
     </div>
-    <div style="margin-top:auto;"><div class="note">Si no lo ves, mano arriba. Copiloto a tu lado.</div></div>
+    <div style="margin-top:auto;"><div class="note">4 columnas: Nombre, Correo, Mensaje, Status. ¿Trancado? Mano arriba, copiloto a tu lado.</div></div>
   </div>
   <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>12 / 30</span></div>
 </section>
@@ -439,17 +436,13 @@
       <div><div class="eyebrow-lg">Paso 4 · Seguridad Notion · 1 de 2</div><h2 class="slide-title k-md" style="margin-top:14px;">Crea tu llave de <span class="text-gradient-fire">Notion API</span>.</h2></div>
       <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a Notion</div>
     </div>
-    <div class="steps-2" style="margin-top:48px;">
-      <div>
-        <div class="step"><div class="step-num">01</div><div class="step-text">Clic en tu <em>foto de perfil</em> (arriba a la derecha).</div></div>
-        <div class="step"><div class="step-num">02</div><div class="step-text">Abre <kbd>Settings</kbd>.</div></div>
-        <div class="step"><div class="step-num">03</div><div class="step-text">Barra lateral: <kbd>Connections</kbd>.</div></div>
-      </div>
-      <div>
-        <div class="step"><div class="step-num">04</div><div class="step-text">Abajo: <em>Develop or manage integrations</em>.</div></div>
-        <div class="step"><div class="step-num">05</div><div class="step-text"><kbd>New integration</kbd> → <em>"Taller Ignia"</em> → Submit.</div></div>
-        <div class="step"><div class="step-num">06</div><div class="step-text">Copia el <em>Internal Integration Secret</em> 🔑 en un bloc.</div></div>
-      </div>
+    <div class="steps-column" style="margin-top:48px;">
+      <div class="step"><div class="step-num">01</div><div class="step-text">Clic en tu <em>foto de perfil</em> (arriba a la izquierda).</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-text">Abre <kbd>Settings</kbd>.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-text">Barra lateral: <kbd>Connections</kbd>.</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-text">Abajo: <em>Develop or manage connections</em>.</div></div>
+      <div class="step"><div class="step-num">05</div><div class="step-text"><kbd>New integration</kbd> → <em>"Taller Ignia"</em> → Submit.</div></div>
+      <div class="step"><div class="step-num">06</div><div class="step-text">Copia el <em>Internal Integration Secret</em> 🔑 en un bloc.</div></div>
     </div>
     <div style="margin-top:auto;"><div class="note">La llave empieza por <code style="font-family:var(--font-mono); background:#eee; padding:2px 8px; border-radius:6px;">ntn_…</code> o <code style="font-family:var(--font-mono); background:#eee; padding:2px 8px; border-radius:6px;">secret_…</code></div></div>
   </div>
@@ -460,11 +453,11 @@
 <section data-label="14 Notion · Abrir permisos">
   <div class="pad">
     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-      <div><div class="eyebrow-lg" style="color:var(--brand-orange);">⚠ Paso 5 · Seguridad Notion · 2 de 2 · el que todos olvidan</div><h2 class="slide-title k-md" style="margin-top:14px;">La llave no sirve<br/>si la puerta tiene <span class="text-gradient-fire">seguro</span>.</h2></div>
+      <div><div class="eyebrow-lg" style="color:var(--brand-orange);">⚠ Paso 5 · Seguridad Notion · 2 de 2 · el que todos olvidan</div><h2 class="slide-title k-md" style="margin-top:14px;">La llave no sirve<br/>si no hay <span class="text-gradient-fire">puerta</span>.</h2></div>
       <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a Notion</div>
     </div>
-    <div style="margin-top:48px;">
-      <div class="step"><div class="step-num">01</div><div class="step-text">Vuelve a tu página <em>Lead Tracker</em>.</div></div>
+    <div class="steps-column" style="margin-top:48px;">
+      <div class="step"><div class="step-num">01</div><div class="step-text">Vuelve a tu página <em>Tracker</em>.</div></div>
       <div class="step"><div class="step-num">02</div><div class="step-text">Arriba a la derecha, los <em>tres puntitos</em> <kbd>⋯</kbd>.</div></div>
       <div class="step"><div class="step-num">03</div><div class="step-text"><kbd>Connections</kbd> → <kbd>Connect to</kbd>.</div></div>
       <div class="step"><div class="step-num">04</div><div class="step-text">Busca <em>Taller Ignia</em> → clic → <em>Confirm</em>.</div></div>
@@ -481,19 +474,15 @@
       <div><div class="eyebrow-lg">Paso 6 · Conecta los tubos</div><h2 class="slide-title k-md" style="margin-top:14px;">Vuelve a n8n. Agrega <span class="text-gradient-fire">Notion</span>.</h2></div>
       <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a n8n</div>
     </div>
-    <div class="steps-2" style="margin-top:48px;">
-      <div>
-        <div class="step"><div class="step-num">01</div><div class="step-text">Al lado del Webhook, botón <kbd>+</kbd>.</div></div>
-        <div class="step"><div class="step-num">02</div><div class="step-text">Busca <em>Notion</em> → <em>"Create a database page"</em>.</div></div>
-        <div class="step"><div class="step-num">03</div><div class="step-text">Credential: <em>Create new credential</em>.</div></div>
-      </div>
-      <div>
-        <div class="step"><div class="step-num">04</div><div class="step-text">Pega el <em>Internal Integration Secret</em> 🔑 → <kbd>Save</kbd>.</div></div>
-        <div class="step"><div class="step-num">05</div><div class="step-text">Database: busca <em>Lead Tracker</em>.</div></div>
-        <div class="step"><div class="step-num">06</div><div class="step-text">Mapea: <em>Name → Nombre</em>, <em>Email → Correo</em>, <em>Message → Mensaje</em>.</div></div>
-      </div>
+    <div class="steps-column" style="margin-top:48px;">
+      <div class="step"><div class="step-num">01</div><div class="step-text">Al lado del Webhook, botón <kbd>+</kbd>.</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-text">Busca <em>Notion</em> → <em>"Create a database page"</em>.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-text">Credential: <em>Create new credential</em>.</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-text">Pega el <em>Internal Integration Secret</em> 🔑 → <kbd>Save</kbd>.</div></div>
+      <div class="step"><div class="step-num">05</div><div class="step-text">Database: busca <em>Tracker</em>.</div></div>
+      <div class="step"><div class="step-num">06</div><div class="step-text">Mapea: <em>Name → Nombre</em>, <em>Email → Correo</em>, <em>Message → Mensaje</em>.</div></div>
     </div>
-    <div style="margin-top:auto;"><div class="note">¿No aparece <em style="font-style:normal; color:var(--brand-orange); font-weight:600;">Lead Tracker</em>? Te saltaste abrir la puerta. Slide 14.</div></div>
+    <div style="margin-top:auto;"><div class="note">¿No aparece <em style="font-style:normal; color:var(--brand-orange); font-weight:600;">Tracker</em>? Te saltaste abrir la puerta. Slide 14.</div></div>
   </div>
   <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>15 / 30</span></div>
 </section>
@@ -504,15 +493,19 @@
   <div class="pad">
     <div class="checkpoint-banner"><span class="bar"></span> Checkpoint visual · 1 de 3</div>
     <h2 class="slide-title k-lg" style="margin-top:28px; color:#fff; max-width:1500px;">Manos <span class="text-gradient-fire">fuera</span> del teclado.</h2>
-    <div style="font-family:var(--font-display); font-weight:500; font-size:38px; color:rgba(255,255,255,.78); margin-top:20px;">Levanta la mano si ves las dos cosas:</div>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:40px;">
-      <div style="border:1px solid rgba(255,255,255,.14); border-radius:22px; padding:32px; background:rgba(255,255,255,.04);">
-        <div style="font-family:var(--font-display); font-weight:700; font-size:26px; color:var(--brand-orange); letter-spacing:.14em; text-transform:uppercase;">Debe decir</div>
-        <div style="font-family:var(--font-mono); font-size:38px; margin-top:14px; color:#fff; line-height:1.25;">Webhook → listening<br/>for test event</div>
+    <div style="font-family:var(--font-display); font-weight:500; font-size:38px; color:rgba(255,255,255,.78); margin-top:20px;">Levanta la mano si ves las tres cosas:</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px; margin-top:40px;">
+      <div style="border:1px solid rgba(255,255,255,.14); border-radius:22px; padding:28px; background:rgba(255,255,255,.04);">
+        <div style="font-family:var(--font-display); font-weight:700; font-size:24px; color:var(--brand-orange); letter-spacing:.14em; text-transform:uppercase;">Fillout</div>
+        <div style="font-family:var(--font-mono); font-size:32px; margin-top:14px; color:#fff; line-height:1.25;">Form <em style="font-style:normal; color:var(--brand-orange);">Publicado</em><br/><span style="color:rgba(255,255,255,.6);">con link vivo</span></div>
       </div>
-      <div style="border:1px solid rgba(255,255,255,.14); border-radius:22px; padding:32px; background:rgba(255,255,255,.04);">
-        <div style="font-family:var(--font-display); font-weight:700; font-size:26px; color:var(--brand-orange); letter-spacing:.14em; text-transform:uppercase;">Debe verse</div>
-        <div style="font-family:var(--font-mono); font-size:38px; margin-top:14px; color:#fff; line-height:1.25;">Notion · Lead Tracker<br/><span style="color:rgba(255,255,255,.6);">sin círculos rojos</span></div>
+      <div style="border:1px solid rgba(255,255,255,.14); border-radius:22px; padding:28px; background:rgba(255,255,255,.04);">
+        <div style="font-family:var(--font-display); font-weight:700; font-size:24px; color:var(--brand-orange); letter-spacing:.14em; text-transform:uppercase;">n8n · Execute Workflow</div>
+        <div style="font-family:var(--font-mono); font-size:30px; margin-top:14px; color:#fff; line-height:1.25;">Waiting for you<br/>to call Test URL</div>
+      </div>
+      <div style="border:1px solid rgba(255,255,255,.14); border-radius:22px; padding:28px; background:rgba(255,255,255,.04);">
+        <div style="font-family:var(--font-display); font-weight:700; font-size:24px; color:var(--brand-orange); letter-spacing:.14em; text-transform:uppercase;">Notion</div>
+        <div style="font-family:var(--font-mono); font-size:32px; margin-top:14px; color:#fff; line-height:1.25;">Tracker cargado<br/><span style="color:rgba(255,255,255,.6);">sin círculos rojos</span></div>
       </div>
     </div>
     <div style="margin-top:auto; font-family:var(--font-display); font-weight:600; font-size:30px; color:rgba(255,255,255,.8);">Copilotos, recorran. No avanzamos hasta que sea un mar de manos.</div>
@@ -600,38 +593,61 @@
       <div><div class="eyebrow-lg">Paso 5 · El prompt</div><h2 class="slide-title k-md" style="margin-top:14px; color:#fff;">La instrucción para la <span class="text-gradient-fire">IA</span>.</h2></div>
       <div class="pill pill-dark"><span class="dot"></span>Pégalo en el campo <em style="font-style:normal; color:var(--brand-orange); font-weight:600;">&nbsp;User message</em></div>
     </div>
-    <div class="codeblock" style="margin-top:30px;"><span class="cm"># Eres el conserje de leads de mi negocio.</span>
-<span class="cm"># Tu trabajo: leer el mensaje del cliente y devolver SOLO un JSON con:</span>
-
+    <div class="codeblock" style="margin-top:26px; font-size:24px; line-height:1.5; padding:28px 32px;"><span class="cm"># Eres el conserje de leads. Lees el mensaje del cliente y devuelves SIEMPRE un JSON con 3 cosas:</span>
+<span class="cm">#   1. resumen    → el mensaje del cliente en una línea</span>
+<span class="cm">#   2. prioridad  → qué tan urgente responderle (alta, media, baja)</span>
+<span class="cm">#   3. borrador   → un borrador de respuesta para el cliente</span>
 {
   "<span class="kw">resumen</span>"  : <span class="str">"una línea, máximo 15 palabras"</span>,
   "<span class="kw">prioridad</span>": <span class="str">"alta | media | baja"</span>,
-  "<span class="kw">borrador</span>" : <span class="str">"respuesta en tono cercano, en español colombiano, &lt;80 palabras"</span>
+  "<span class="kw">borrador</span>" : <span class="str">"respuesta en tono cercano, español colombiano, &lt;80 palabras"</span>
 }
 
 <span class="cm"># Mensaje del cliente:</span>
-<span class="var">{{ $json.body.mensaje }}</span>   <span class="cm">← arrastra este campo del Webhook</span></div>
-    <div style="margin-top:auto; font-family:var(--font-display); font-weight:500; font-size:26px; color:rgba(255,255,255,.7);">Conecta la salida al Notion. Mapea <em style="font-style:normal; color:var(--brand-orange);">resumen</em> y <em style="font-style:normal; color:var(--brand-orange);">prioridad</em> a sus columnas.</div>
+<span class="var">{{ $json.body.mensaje }}</span>   <span class="cm">← arrástralo del Webhook</span></div>
+    <div style="margin-top:auto; display:flex; flex-direction:column; gap:22px;">
+      <div style="border:1px solid rgba(255,255,255,.14); border-radius:18px; padding:24px 28px; background:rgba(255,255,255,.04); display:flex; flex-direction:column; gap:18px;">
+        <div style="font-family:var(--font-display); font-weight:700; font-size:22px; color:var(--brand-orange); letter-spacing:.14em; text-transform:uppercase;">⚙ Options · Output Format</div>
+        <div style="display:flex; gap:40px; flex-wrap:wrap; font-family:var(--font-display); font-size:24px; color:#fff;">
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <span style="color:rgba(255,255,255,.55); font-size:20px; text-transform:uppercase; letter-spacing:.12em;">Type</span>
+            <span style="font-family:var(--font-mono); color:var(--brand-orange); font-weight:600; font-size:28px;">JSON Object</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <span style="color:rgba(255,255,255,.55); font-size:20px; text-transform:uppercase; letter-spacing:.12em;">Verbosity</span>
+            <span style="font-family:var(--font-mono); color:var(--brand-orange); font-weight:600; font-size:28px;">Medium</span>
+          </div>
+        </div>
+      </div>
+      <div style="font-family:var(--font-display); font-weight:500; font-size:24px; color:rgba(255,255,255,.7);">Siguiente: abrirle espacio al conserje en el Tracker <span style="color:var(--brand-orange);">→</span></div>
+    </div>
   </div>
   <div class="footer-chrome"><span>Build 2 · El conserje de IA</span><span>20 / 30</span></div>
 </section>
 
-<!-- 21 CHECKPOINT 2 -->
-<section data-label="21 Checkpoint 2" class="on-dark">
+<!-- 21 NOTION ADD COLUMNS + MAP -->
+<section data-label="21 Notion · 3 columnas más + mapeo" class="on-dark">
   <div class="flame-watermark" style="bottom:-340px; right:-120px;">🔥</div>
   <div class="pad">
-    <div class="checkpoint-banner"><span class="bar"></span> Checkpoint visual · 2 de 3</div>
-    <h2 class="slide-title k-lg" style="margin-top:28px; color:#fff;">Tu flujo debe verse <span class="text-gradient-fire">así</span>.</h2>
-    <div style="margin-top:50px; display:grid; grid-template-columns:1fr 60px 1fr 60px 1fr; gap:0; align-items:stretch;">
-      <div class="arch-block" style="background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.14);"><div class="ab-role" style="color:rgba(255,255,255,.55);">Gatillo</div><div class="ab-title" style="color:#fff;">Webhook</div><div class="ab-desc" style="color:rgba(255,255,255,.65);">listening ✓</div></div>
-      <div class="tube"><div class="tube-line"></div></div>
-      <div class="arch-block" style="background:rgba(219,105,52,.15); color:#fff; border-color:rgba(219,105,52,.4);"><div class="ab-role" style="color:var(--brand-orange);">Acción · IA</div><div class="ab-title" style="color:#fff;">OpenAI</div><div class="ab-desc" style="color:rgba(255,255,255,.65);">gpt-4o-mini ✓</div></div>
-      <div class="tube"><div class="tube-line"></div></div>
-      <div class="arch-block" style="background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.14);"><div class="ab-role" style="color:rgba(255,255,255,.55);">Acción · DB</div><div class="ab-title" style="color:#fff;">Notion</div><div class="ab-desc" style="color:rgba(255,255,255,.65);">Lead Tracker ✓</div></div>
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div><div class="eyebrow-lg">Paso 6 · Cierra el bucle</div><h2 class="slide-title k-md" style="margin-top:14px; color:#fff;">3 columnas más, y <span class="text-gradient-fire">mapea</span>.</h2></div>
+      <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB Notion ↔ n8n</div>
     </div>
-    <div style="margin-top:52px; font-family:var(--font-display); font-weight:600; font-size:32px; color:#fff;">Tres cajitas. Dos cuerditas. Cero rojos.</div>
+    <div class="steps-column" style="margin-top:40px;">
+      <div class="step"><div class="step-num">01</div><div class="step-text">🕹️ En <em>Notion</em> → tu <em>Tracker</em>. Agrega 3 columnas tipo <kbd>Text</kbd>, una por una: <em>resumen</em> · <em>prioridad</em> · <em>borrador</em>.</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-text">🕹️ ALT-TAB a <em>n8n</em> → nodo <em>Notion</em> → refresca la lista de campos.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-text">Arrastra desde el OpenAI: <em>resumen → resumen</em>, <em>prioridad → prioridad</em>, <em>borrador → borrador</em>.</div></div>
+    </div>
+    <div style="margin-top:36px; display:grid; grid-template-columns:1fr 40px 1fr 40px 1fr; gap:0; align-items:stretch;">
+      <div class="arch-block" style="padding:20px 24px; background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.14); gap:6px;"><div class="ab-role" style="color:rgba(255,255,255,.55); font-size:18px;">Gatillo</div><div class="ab-title" style="color:#fff; font-size:38px;">Webhook</div><div class="ab-desc" style="color:rgba(255,255,255,.65); font-size:20px;">listening ✓</div></div>
+      <div class="tube"><div class="tube-line"></div></div>
+      <div class="arch-block" style="padding:20px 24px; background:rgba(219,105,52,.15); color:#fff; border-color:rgba(219,105,52,.4); gap:6px;"><div class="ab-role" style="color:var(--brand-orange); font-size:18px;">Acción · IA</div><div class="ab-title" style="color:#fff; font-size:38px;">OpenAI</div><div class="ab-desc" style="color:rgba(255,255,255,.65); font-size:20px;">gpt-4o-mini ✓</div></div>
+      <div class="tube"><div class="tube-line"></div></div>
+      <div class="arch-block" style="padding:20px 24px; background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.14); gap:6px;"><div class="ab-role" style="color:rgba(255,255,255,.55); font-size:18px;">Acción · DB</div><div class="ab-title" style="color:#fff; font-size:38px;">Notion</div><div class="ab-desc" style="color:rgba(255,255,255,.65); font-size:20px;">Tracker · 7 col ✓</div></div>
+    </div>
+    <div style="margin-top:auto;"><div class="note" style="color:rgba(255,255,255,.75);">Tres cajitas. Dos cuerditas. Cero rojos. El conserje ya tiene dónde escribir.</div></div>
   </div>
-  <div class="footer-chrome"><span>Checkpoint · Build 2</span><span>21 / 30</span></div>
+  <div class="footer-chrome"><span>Build 2 · El conserje de IA</span><span>21 / 30</span></div>
 </section>
 
 <!-- 22 PROBANDO EL CONSERJE -->
@@ -681,27 +697,22 @@
   <div class="footer-chrome"><span>Pausa · 20 min</span><span>23 / 30</span></div>
 </section>
 
-<!-- 24 REVERSE TRIGGER -->
-<section data-label="24 Notion como gatillo">
+<!-- 24 NOTION AUTOMATION TRIGGER -->
+<section data-label="24 Notion · Automation (gatillo)">
   <div class="pad">
     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
       <div><div class="eyebrow-lg">Construcción guiada · 3 de 3 · Paso 7</div><h2 class="slide-title k-md" style="margin-top:14px; max-width:1600px;">La base de datos también <span class="text-gradient-fire">habla</span>.</h2></div>
-      <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a n8n</div>
+      <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a Notion</div>
     </div>
-    <div style="font-family:var(--font-display); font-weight:500; font-size:28px; color:#3b3d45; margin-top:12px; max-width:1500px; line-height:1.35;">Notion deja de ser solo datos. Ahora es <em style="font-style:normal; color:var(--brand-orange); font-weight:700;">gatillo</em>.</div>
-    <div class="steps-2" style="margin-top:36px;">
-      <div>
-        <div class="step"><div class="step-num">01</div><div class="step-text">Nuevo workflow → <em>"Mensajero Inverso"</em>.</div></div>
-        <div class="step"><div class="step-num">02</div><div class="step-text"><kbd>Add first step</kbd> → <em>Notion Trigger</em>.</div></div>
-        <div class="step"><div class="step-num">03</div><div class="step-text">Evento: <em>"On database page updated"</em>.</div></div>
-      </div>
-      <div>
-        <div class="step"><div class="step-num">04</div><div class="step-text">Base: <em>Lead Tracker</em>.</div></div>
-        <div class="step"><div class="step-num">05</div><div class="step-text">Condición: <kbd>Status = Aprobado</kbd>.</div></div>
-        <div class="step"><div class="step-num">06</div><div class="step-text"><kbd>Listen for event</kbd>.</div></div>
-      </div>
+    <div style="font-family:var(--font-display); font-weight:500; font-size:28px; color:#3b3d45; margin-top:12px; max-width:1500px; line-height:1.35;">Sin n8n. Notion sola es <em style="font-style:normal; color:var(--brand-orange); font-weight:700;">gatillo + acción</em>.</div>
+    <div class="steps-column" style="margin-top:36px;">
+      <div class="step"><div class="step-num">01</div><div class="step-text">En tu <em>Tracker</em>, arriba a la derecha: icono <em>⚡ rayo</em>.</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-text"><kbd>+ New automation</kbd>. Nómbrala <em>"Aprobado → correo"</em>.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-text">Trigger: <kbd>When</kbd> · <em>Status</em> · <kbd>set to</kbd> → <em>Aprobado</em>.</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-text">Action: <kbd>+ Add action</kbd> → <em>Send email</em>.</div></div>
+      <div class="step"><div class="step-num">05</div><div class="step-text">Conecta tu cuenta de <em>Gmail</em> → acepta permisos.</div></div>
     </div>
-    <div style="margin-top:auto;"><div class="note">Misma lógica: <em style="font-style:normal; color:var(--brand-orange); font-weight:600;">gatillo + acción</em>. Solo cambia quién dispara.</div></div>
+    <div style="margin-top:auto;"><div class="note">El cuerpo del correo lo armamos en el <em style="font-style:normal; color:var(--brand-orange); font-weight:600;">siguiente paso</em>.</div></div>
   </div>
   <div class="footer-chrome"><span class="brand-lockup"><img src="assets/logo-full.png" alt=""/></span><span>24 / 30</span></div>
 </section>
@@ -711,19 +722,14 @@
   <div class="pad">
     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
       <div><div class="eyebrow-lg">Paso 8 · El aviso final</div><h2 class="slide-title k-md" style="margin-top:14px;">Si <em style="font-style:normal; color:var(--brand-orange);">Aprobado</em> → manda el <span class="text-gradient-fire">correo</span> solo.</h2></div>
-      <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a n8n</div>
+      <div class="alt-tab-chip"><span class="flame">🕹️</span> ALT-TAB a Notion</div>
     </div>
-    <div class="steps-2" style="margin-top:48px;">
-      <div>
-        <div class="step"><div class="step-num">01</div><div class="step-text">Al lado del Notion Trigger, clic en <kbd>+</kbd>.</div></div>
-        <div class="step"><div class="step-num">02</div><div class="step-text">Busca <em>Gmail</em> → <em>"Send a message"</em>.</div></div>
-        <div class="step"><div class="step-num">03</div><div class="step-text"><em>Sign in with Google</em> → acepta permisos.</div></div>
-      </div>
-      <div>
-        <div class="step"><div class="step-num">04</div><div class="step-text"><kbd>To</kbd>: arrastra el <em>correo</em> del lead.</div></div>
-        <div class="step"><div class="step-num">05</div><div class="step-text"><kbd>Subject</kbd>: <em>"Tu solicitud fue aprobada"</em>. <kbd>Body</kbd>: <em>borrador</em> de la IA.</div></div>
-        <div class="step"><div class="step-num">06</div><div class="step-text">Activa el workflow con el switch de arriba.</div></div>
-      </div>
+    <div class="steps-column" style="margin-top:48px;">
+      <div class="step"><div class="step-num">01</div><div class="step-text"><kbd>To</kbd>: arrastra la propiedad <em>Correo</em>.</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-text"><kbd>Subject</kbd>: <em>"Tu solicitud fue aprobada"</em>.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-text"><kbd>Body</kbd>: escribe <em>"Hola "</em> + propiedad <em>Nombre</em>.</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-text">Debajo, arrastra la propiedad <em>borrador</em> (la respuesta de la IA).</div></div>
+      <div class="step"><div class="step-num">05</div><div class="step-text"><kbd>Save</kbd>. Switch <em>On</em>, arriba a la derecha de la automation.</div></div>
     </div>
     <div style="margin-top:auto;"><div class="note">Pro tip: usa tu propio correo en el form para la primera prueba.</div></div>
   </div>
@@ -739,9 +745,9 @@
     <div style="display:grid; grid-template-columns:1fr 60px 1fr 60px 1fr; gap:0; align-items:stretch; margin-top:58px;">
       <div class="arch-block" style="background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.14);"><div class="ab-role" style="color:rgba(255,255,255,.55);">Tu mano</div><div class="ab-title" style="color:#fff;">Notion</div><div class="ab-desc" style="color:rgba(255,255,255,.65);">Status → Aprobado</div></div>
       <div class="tube"><div class="tube-line"></div></div>
-      <div class="arch-block" style="background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.14);"><div class="ab-role" style="color:rgba(255,255,255,.55);">Backend</div><div class="ab-title" style="color:#fff;">n8n</div><div class="ab-desc" style="color:rgba(255,255,255,.65);">dispara el flujo</div></div>
+      <div class="arch-block" style="background:rgba(219,105,52,.15); color:#fff; border-color:rgba(219,105,52,.4);"><div class="ab-role" style="color:var(--brand-orange);">⚡ Automation</div><div class="ab-title" style="color:#fff;">Notion</div><div class="ab-desc" style="color:rgba(255,255,255,.65);">Send email</div></div>
       <div class="tube"><div class="tube-line"></div></div>
-      <div class="arch-block" style="background:rgba(219,105,52,.15); color:#fff; border-color:rgba(219,105,52,.4);"><div class="ab-role" style="color:var(--brand-orange);">Acción</div><div class="ab-title" style="color:#fff;">Gmail</div><div class="ab-desc" style="color:rgba(255,255,255,.65);">correo &lt; 20s</div></div>
+      <div class="arch-block" style="background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.14);"><div class="ab-role" style="color:rgba(255,255,255,.55);">Destino</div><div class="ab-title" style="color:#fff;">Gmail</div><div class="ab-desc" style="color:rgba(255,255,255,.65);">inbox &lt; 20s</div></div>
     </div>
     <div style="margin-top:52px; font-family:var(--font-display); font-weight:600; font-size:30px; color:#fff;">¿Te llegó? Pulgar arriba. ¿No? Copilotos, caso en vivo.</div>
     <div style="font-family:var(--font-display); font-weight:500; font-size:24px; color:rgba(255,255,255,.6); margin-top:12px;">90% de las veces es un permiso de Google sin aceptar.</div>
@@ -808,17 +814,22 @@
       <div class="eyebrow-lg">Tu micro-compromiso</div>
       <div class="brand-lockup"><img src="assets/logo-full.png" alt="Ignia"/></div>
     </div>
-    <h2 class="slide-title k-lg" style="margin-top:24px; max-width:1700px;">Mañana, <span class="text-gradient-fire">antes del mediodía</span>:<br/>automatiza <em style="font-style:normal;">una</em> tarea aburrida.</h2>
+    <h2 class="slide-title k-lg" style="margin-top:24px; max-width:1700px;">Una automatización real que te devuelva<br/><span class="text-gradient-fire">1 hora a la semana</span>.</h2>
     <div style="margin-top:40px; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;">
       <div style="border:1px solid var(--line); border-radius:22px; padding:32px; background:#fff;">
         <div style="font-family:var(--font-display); font-weight:700; font-size:24px; text-transform:uppercase; letter-spacing:.14em; color:var(--brand-orange);">Las reglas</div>
-        <div style="font-family:var(--font-display); font-weight:700; font-size:44px; margin-top:14px; letter-spacing:-0.015em; line-height:1.1;">Una tarea.<br/>Quince minutos.<br/>Tuyos.</div>
-        <div class="note" style="margin-top:18px;">No 3. No 10. Una. Mándala a <em style="font-style:normal; color:var(--brand-orange); font-weight:700;">@ignia</em> en Instagram y la celebramos.</div>
+        <div style="font-family:var(--font-display); font-weight:700; font-size:44px; margin-top:14px; letter-spacing:-0.015em; line-height:1.1;">Una tarea.<br/>Una hora semanal.<br/>Tuya.</div>
+        <div class="note" style="margin-top:18px;">No 3. No 10. Una. Que te quite la misma hora <em style="font-style:normal; color:var(--brand-orange); font-weight:700;">todas las semanas</em>.</div>
       </div>
-      <div style="display:flex; flex-direction:column; gap:20px;">
-        <div class="pill" style="align-self:flex-start;"><span class="dot"></span>Jueves de Coworking · gratis · cada semana</div>
-        <div class="pill" style="align-self:flex-start;"><span class="dot"></span>Action Lab · próxima cohorte · inscripciones abiertas</div>
-        <div class="pill" style="align-self:flex-start;"><span class="dot"></span>@ignia · ignia.co · comunidad con fuego 🔥</div>
+      <div style="border:1px solid var(--line); border-radius:22px; padding:32px; background:#fff;">
+        <div style="font-family:var(--font-display); font-weight:700; font-size:24px; text-transform:uppercase; letter-spacing:.14em; color:var(--brand-orange);">Súbela a Plataforma</div>
+        <div style="font-family:var(--font-display); font-weight:700; font-size:38px; margin-top:14px; letter-spacing:-0.015em; line-height:1.1;">Micro-Retos <span style="color:var(--brand-orange);">↗</span></div>
+        <div class="note" style="margin-top:16px; margin-bottom:14px;">Sirve cualquiera de estos tres:</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div class="pill" style="align-self:flex-start;"><span class="dot"></span>📸&nbsp; Screenshot del flujo funcionando</div>
+          <div class="pill" style="align-self:flex-start;"><span class="dot"></span>🔗&nbsp; Link del template de Notion</div>
+          <div class="pill" style="align-self:flex-start;"><span class="dot"></span>🧩&nbsp; JSON export del workflow de n8n</div>
+        </div>
       </div>
     </div>
     <div style="margin-top:auto; display:flex; align-items:center; gap:24px;">
